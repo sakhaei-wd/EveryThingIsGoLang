@@ -1,0 +1,128 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+
+// ======================= slicing an array =========================
+	planets := [...]string{
+		"Mercury",
+		"Venus",
+		"Earth",
+		"Mars",
+		"Jupiter",
+		"Saturn",
+		"Uranus",
+		"Neptune",
+	}
+	terrestrial := planets[0:4] //return items 0 to 4 of array
+	gasGiants := planets[4:6]   //return items 4 to 6
+	iceGiants := planets[6:8]   //return items 6 to 8
+
+	fmt.Println(terrestrial, gasGiants, iceGiants)
+	//Prints [Mercury Venus Earth Mars] [Jupiter Saturn] [Uranus Neptune]
+
+
+// default indices for slicing
+terrestrial := planets[:4] //return from item 0 to 4 (from beginning to 4)
+gasGiants := planets[4:6]  //return item 4 to 6
+iceGiants := planets[6:]   //return item 6 to end
+
+// slicing strings : The slicing syntax for arrays also works on strings:
+neptune := "Neptune"
+tune := neptune[3:]
+fmt.Println(tune)
+
+
+//return every slice of array (slice is array item)
+dwarfArray := [...]string{"Ceres", "Pluto", "Haumea", "Makemake", "Eris"}
+dwarfSlice := dwarfArray[:] //[:] 
+
+//get the type of array : with %T
+fmt.Printf("array %T",dwarfSlice)
+
+
+//removes the [ ] from array print ===========================
+func hyperspace(worlds []string) {
+	for i := range worlds {
+		worlds[i] = strings.TrimSpace(worlds[i])
+	}
+}
+
+planets := []string{" Venus ", "Earth ", " Mars"}
+	hyperspace(planets)
+	fmt.Println(strings.Join(planets, ""))
+//print : VenusEarthMars 
+//=====================================
+//array as type  :
+type StringSlice []string
+//=====================================
+
+
+//============= Sorting a slice of strings ===============
+package main
+import (
+"fmt"
+"sort"
+)
+
+func main() {
+	planets := []string {
+	"Mercury", "Venus", "Earth", "Mars",
+	"Jupiter", "Saturn", "Uranus", "Neptune",
+	}
+
+	numbers := [] int {
+		1,56,23,12,9,23,2,45,4,13
+	}
+
+	
+	sort.StringSlice(planets).Sort() //sort method for string array
+
+	sort.IntSlice(numbers).Sort()    //sort method for int array (package sort is neccessary)
+
+	fmt.Println(planets) //Prints [Earth Jupiter Mars Mercury Neptune Saturn Uranus Venus]
+	fmt.Println(numbers) 
+}
+//==============================================
+//TrimSpace returns a slice with leading and trailing white space removed.
+//Join concatenates a slice of elements with a separator placed between them
+
+
+
+
+//Experiment: terraform.go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	planets := []string{
+		"Mercury", "Venus", "Earth", "Mars",
+		"Jupiter", "Saturn", "Uranus", "Neptune",
+	}
+
+	for i, item := range planets {
+		if i == len(planets)-1 {
+			planets[i] = planet(planets[i]).Terraform()
+
+		} else {
+
+			planets[i] = "new " + item
+		}
+
+	}
+
+	fmt.Print(planets)
+}
+
+type planet string
+
+func (p planet) Terraform() string {
+	return "new " + string(p)
+}
+

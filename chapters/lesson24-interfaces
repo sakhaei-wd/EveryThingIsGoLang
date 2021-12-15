@@ -1,0 +1,133 @@
+package main
+
+import (
+	"fmt"
+)
+
+//Think of what something can do, rather than what it is. This way of thinking, as
+//expressed through interfaces, will help your code to adapt to change.
+
+// The majority of types focus on the values they store: integers for whole numbers, strings
+// for text, and so on. The interface type is different. Interfaces are concerned with what a
+// type can do, not the value it holds.
+
+//=================================================
+//a set of method 
+var t interface {
+	talk() string
+	}
+	
+// The variable t can hold any value of any type that satisfies the interface. More specifically,
+// a type will satisfy the interface if it declares a method named talk that accepts no
+// arguments and returns a string
+
+
+//=================================================
+//Polymorphism
+type martian struct{}
+
+func (m martian) talk() string {
+	return "nack nack"
+}
+
+type laser int
+func (l laser) talk() string {
+	return strings.Repeat("pew ", int(l))
+}
+
+var t interface {
+	talk() string
+}
+t = martian{}
+fmt.Println(t.talk())
+
+t = laser(3)
+fmt.Println(t.talk())
+
+// The shape-shifting variable t is able to take the form of a martian or laser. Computer scientists
+// say that interfaces provide polymorphism, which means “many shapes.”
+
+
+//=================================================
+//use of interface
+type talker interface {
+	talk() string
+}
+
+type dog struct {
+	voice string
+}
+
+type cat struct {
+	voice string
+}
+
+func (item dog) talk() string {
+	return item.voice + " hup hup"
+}
+
+func (item cat) talk() string {
+	return item.voice + "mioo mioo"
+}
+
+func shout(item talker) string {
+	return item.talk()
+}
+
+
+func main(){
+	fmt.Println(shout(dog{voice: "i'm a dog "}))
+	fmt.Print(shout(cat{voice: "i'm a cat "}))
+
+	//print : i'm a dog  hup hup
+	//		  i'm a cat mioo mioo
+
+	//You can use the shout function with any value that satisfies the talker interface, whether
+	//cat or dog
+}
+
+//=================================================
+//also we can define struct with embeded struct which inherit interface method
+
+type animal struct {
+	cat
+}
+
+func main() {
+	myPet := animal {cat : cat{voice: "hello i'm cat"} }
+	fmt.Print(myPet.talk())
+	
+	//talk() method forwarded to myPet
+}
+
+//=================================================
+//use interface as type to struct
+
+type animal struct {
+	talker
+}
+
+//now , we can access to both cat and dog : 
+myItem  := animal{cat{voice: "mioo mioo"}}
+myItem2 := animal{dog{voice : "hap hap"}}
+
+//=================================================
+
+// Experiment: marshal.go
+// Write a program that outputs coordinates in JSON format, expanding on work done for
+// the preceding quick check. The JSON output should provide each coordinate in decimal
+// degrees (DD) as well as the degrees, minutes, seconds format:
+// {
+//    "decimal": 135.9,
+//    "dms": "135º54'0.0\" E",
+//    "degrees": 135,
+//    "minutes": 54,
+//    "seconds": 0,
+//    "hemisphere": "E"
+// }
+
+// This can be achieved without modifying the coordinate structure by satisfying the
+// json.Marshaler interface to customize the JSON. The MarshalJSON method you write may
+// make use of json.Marshal.
+
+

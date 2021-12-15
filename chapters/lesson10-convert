@@ -1,0 +1,75 @@
+package convert
+
+import (
+	"fmt"
+)
+
+func main() {
+	//countdown := "Launch in T minus " + 10 + " seconds."
+	//Invalid operation: mismatched types string and int
+
+	//"10" - 1 : 9 in JavaScript and PHP
+
+	//"10" + 2 : “102” in JavaScript or Java, 12 in PHP
+
+	age := 41
+	marsDays := 687       //age and marsDays are integers.
+	earthDays := 365.2425 //earthDays is a 	floating point type.
+	fmt.Println("I am", age*earthDays/marsDays, "years old on Mars.")
+	//Invalid operation: mismatched types
+
+	age := 41
+	marsAge := float64(age)
+	marsDays := 687.0
+	earthDays := 365.2425
+	marsAge = marsAge * earthDays / marsDays
+	fmt.Println("I am", marsAge, "years old on Mars.")
+	//Prints I am 21.797587336244543 years old on Mars.
+
+	//question : What code would convert the variable red to an unsigned 8-bit integer?
+	//answer   : The type conversion would be uint8(red).
+
+	var bh float64 = 32767
+	var h = int16(bh)
+	fmt.Println(h)
+
+	if bh < math.MinInt16 || bh > math.MaxInt16 {
+		// handle out of range value
+	}
+
+	//What code will determine if the variable v is within the range of an 8-bit unsigned integer?
+	v := 42
+	if v >= 0 && v <= math.MaxUint8 {
+		v8 := uint8(v)
+		fmt.Println("converted:", v8)
+	}
+	//Prints converted: 42
+
+	var pi rune = 960
+	var alpha rune = 940
+	var omega rune = 969
+	var bang byte = 33
+	fmt.Print(string(pi), string(alpha), string(omega), string(bang))
+	//Prints πάω!
+
+	//Another way to convert a number to a string is to use Sprintf,
+	countdown := 9
+	str := fmt.Sprintf("Launch in T minus %v seconds.", countdown)
+	fmt.Println(str)
+
+	//question : Name two functions that can convert an integer to a string
+	//answer   : Both Itoa and Sprintf will convert a whole number to a string.
+
+
+	//Converting a string to a Boolean
+	yesNo := "no"
+	launch := (yesNo == "yes")
+	fmt.Println("Ready for launch:", launch)
+	//Prints Ready for launch: false
+
+	customNum := false
+	intCustomNum := 0
+	if (customNum) { intCustomNum := 1}
+
+
+}

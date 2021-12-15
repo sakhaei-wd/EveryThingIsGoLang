@@ -1,0 +1,170 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	//exercise 1
+	//using a composite literal
+	//create and array which holds 5 values of type int
+	//assign values to each index position
+	//range over the array and print the values out
+	//using format printing : print out the type of array
+	var x [5]int
+	for i := 0; i < len(x); i++ {
+		x[i] = i + 2
+		fmt.Print(" ", x[i])
+	}
+
+	fmt.Printf(" %T", x)
+
+	//exercise 2
+	//using a composite literal
+	//create a slice of TYPE int
+	//assign 10 values
+	//range over the slice and print the values out
+	//using format printing
+	//print out the type of the array
+	y := []int{42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
+
+	for i, v := range y {
+		fmt.Print(i, v)
+	}
+	fmt.Printf(" %T \n", y)
+
+	//exercise 3
+	//using the code from the previous example , use SLICING to create the following new slices
+	//which are then printed
+	//[42, 43, 44, 45, 46]
+	//[47, 48, 49, 50, 51]
+	//[44, 45, 46, 47, 48]
+	//[43, 44, 45, 46, 47]
+	customSlice := y[:5]
+	fmt.Println(customSlice)
+	customSlice = y[5:]
+	fmt.Println(customSlice)
+	customSlice = y[2:7]
+	fmt.Println(customSlice)
+	customSlice = y[1:6]
+	fmt.Println(customSlice)
+
+	//exercise 4
+	//follow these steps :
+	//start with this slice : x := []int {42,43, 44, 45, 46,47, 48, 49, 50, 51}
+	//append to that slice this value : 52
+	//print out the slice
+	//in ONE STATEMENT append to that slice these values
+	//53 54 55
+	//print out the slice
+	//append to the slice this slice : x:= []int{56,57,58,59,60}
+
+	exercise4 := []int{42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
+	exercise4 = append(exercise4, 52)
+	fmt.Println(exercise4)
+
+	exercise4 = append(exercise4, 53, 54, 55)
+	fmt.Println(exercise4)
+
+	exercise4 = append(exercise4, []int{56, 57, 58, 59, 60}...)
+	fmt.Println(exercise4)
+
+	//exercise 5
+	//to DELETE from a slice we use APPEND along with slicing , for this hand-on exercise
+	//follow these steps :
+	//start with this slice : x:= []int{42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
+	//use APPEND and SLICING to get the values here which you should then print :
+	//{42, 43, 44, 48, 49, 50, 51}
+	exercise5 := []int{42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
+	exercise5 = append(exercise5[:3], exercise5[6:]...)
+	fmt.Println(exercise5)
+
+	//exercise 6
+	//create a slice to store the names of all of the states in the usa.
+	//what's the length of your slice? what's the capacity
+	//print out all the values , along with their index position in slice, without using range clause. here is a list of states :
+	//'alabama' , 'alaska' , 'arizona' , 'arkansas' , 'california', 'colorado, 'connecticut' ...
+
+	exercise6 := []string{"alabama", "alaska", "arizona", "arkansas", "california", "colorado", "connecticut"}
+	fmt.Printf("\nlen is %v and cap is %v \n", len(exercise6), cap(exercise6))
+	for i := 0; i < len(exercise6); i++ {
+		fmt.Printf("item[%v] = %v | ", i, exercise6[i])
+	}
+
+	//exercise 7
+	//create a slice of a slice of string ([][]string). store the following data in the
+	//multi-dimensional slice :
+	// "james" , "bond" , "shaken" , "not sirred"
+	// "miss"  , "moneypenny" , "hellooo james"
+	//range over the records, then range over the data in each record
+	exercise7 := [][]string{
+		{"james", "bond", "shaken", "not sirred"},
+		{"miss", "moneypenny", "hellooo james"},
+	}
+
+	for i, v := range exercise7 {
+		fmt.Printf("%v %v \n", i, v)
+		for j, k := range v {
+			fmt.Printf("%v %v \n", j, k)
+		}
+	}
+
+	//exercise 8
+	//create a map with a key of TYPE string which is a person's last_first name, and
+	//a value of type []string which stores their favorite things. store three records
+	//in your map. print out all of the values, along with their index position in the slice,
+
+	exercise8 := map[string][]string{
+		"sakhaei_mr":        {"pizza,pasta,soccer,programming"},
+		"nolan_christopher": {"movies,biology,science,filmmaking"},
+		"kafka_frantz":      {"writing, suicide, love making"},
+	}
+
+	for k, v := range exercise8 {
+		fmt.Println("this is record for ", k)
+		for i, v2 := range v {
+			fmt.Println("\t", i, v2)
+		}
+	}
+
+	//exercise 9 
+	//using the code from the previous example, add a record to your map, now print the map out
+	//using the "range" loop
+	exercise9 := map[string][]string{
+		"sakhaei_mr":        {"pizza,pasta,soccer,programming"},
+		"nolan_christopher": {"movies,biology,science,filmmaking"},
+		"kafka_frantz":      {"writing, suicide, love making"},
+	}
+
+	//add new record just by set news values into new key
+	exercise9["daei_ali"] = []string{"kebab","soccer","iran"}
+	for k,v:= range exercise9 {
+		fmt.Println("this is record for ", k)
+		for i, v2 := range v {
+			fmt.Println("\t", i, v2)
+		}
+	}
+
+	//exercise 10
+	//using the code from the previous example, delete a record to your map,
+	//now print the map out using the "range" loop
+	exercise10 := map[string][]string{
+		"ronaldo_chirs":        {"pizza,pasta,soccer,programming"},
+		"messi_lionel": {"movies,biology,science,filmmaking"},
+		"salah_mohammad":      {"writing, suicide, love making"},
+	}
+
+	_,ok := exercise10["salah_mohammad"]
+	if (ok){
+		delete(exercise10,"salah_mohammad")
+	}
+
+	for k,v:= range exercise10 {
+		fmt.Println("this is record for ", k)
+		for i, v2 := range v {
+			fmt.Println("\t", i, v2)
+		}
+	}
+
+}

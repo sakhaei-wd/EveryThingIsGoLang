@@ -1,0 +1,99 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+//array with exactly 8 elements capacity
+var planets [8]string
+
+
+var planets [8]string
+planets[0] = "Mercury"
+planets[1] = "Venus"
+planets[2] = "Earth"
+earth := planets[2]
+fmt.Println(earth)
+//prints : earth
+
+//type 1
+planets[8] = "pluto " //Invalid array index 8 (out of bounds for 	8-element array)
+
+//type 2
+planets := [8] string {"planet1" , "planet2" , "planet3" , "planet4" , "planet5" , "planet6" }
+
+//type 3 : The Go compiler counts the elements.
+planets := [...]string{
+	"Mercury",
+	"Venus",
+	"Earth",
+	"Mars",
+	"Jupiter",
+	"Saturn",
+	"Uranus",
+	"Neptune", //The trailing comma is 	required.
+	}
+
+
+len(planets) //get the length of array 
+//can be used in for loop too 
+for i := 0; i < len(planets); i++ {
+	fmt.Printf("%v ", planets[i])
+}
+
+//in range for loop too
+for i, item := range planets {
+	fmt.Printf("[%v] : %v  ",i, item)
+}
+
+
+
+
+planets := [...]string{
+	"Mercury",
+	"Venus",
+	"Earth",
+	"Mars",
+	"Jupiter",
+	"Saturn",
+	"Uranus",
+	"Neptune",
+}
+
+planetsMarkII := planets
+planets[2] = "whoops"
+fmt.Println(planets)
+fmt.Println(planetsMarkII)
+
+//print : [Mercury Venus whoops Mars Jupiter Saturn Uranus Neptune]
+//		  [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
+
+
+//pass array as function parameter ============================
+
+func PrintArray(arr [4]string) string {
+	var result string
+	for i, item := range arr {
+		result += item
+		if i < len(arr) - 1 {
+			result += "-"
+		}
+	}
+
+	return result
+}
+
+fmt.Print(PrintArray([4]string{"ali", "hassan", "majid", "saeed"}))
+//=============================================================
+//arrays of arrays
+var board [8][8] string
+board[0][0] = "r"
+board[0][7] = "r"
+
+for column := range board[1] {
+board[1][column] = "p"
+}
+//print : [[r       r] [p p p p p p p p] [       ] [       ] [       ] [       ] [       ] [       ]]
+
+

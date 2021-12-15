@@ -1,0 +1,28 @@
+package main
+import (
+  "fmt"
+)
+
+func main() {
+    
+	//hand of excercise - 2
+	//use the following expressions : == , >= , <= , != , < , > 
+	condition := 2 == 4
+	fmt.Print(condition)
+
+	biggerEqualThan := 2 >= 4
+	fmt.Print("\n",biggerEqualThan)
+
+	lowerEqualThan := 2 <= 4
+	fmt.Print("\n",lowerEqualThan)
+
+	notEqual := 2 != 4
+	fmt.Print("\n",notEqual)
+
+	lowerThan := 2 < 4
+	fmt.Print("\n",lowerThan)
+
+	biggerThan := 2 > 4
+	fmt.Print("\n",biggerThan)
+
+}

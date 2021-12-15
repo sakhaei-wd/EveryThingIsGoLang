@@ -1,0 +1,12 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+
+func DrawCol1() string {
+	return "======================="
+}
+

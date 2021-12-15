@@ -1,0 +1,32 @@
+package main
+
+import (
+	"fmt"
+)
+
+//===== constructor functions ==============================
+
+type location struct {
+	lat, long float64
+}
+
+func newLocation(latitude, longtitude float64) location {
+	return location{lat: latitude + 1, long: longtitude + 1}
+}
+
+func main(){
+	myLocation := location{lat: 22, long: 23}
+	fmt.Print("your current location is ", newLocation(myLocation.lat, myLocation.long))
+
+	//another form (without use of instance of struct)
+	fmt.Print("your current location is ", newLocation( location{ lat: 12 }.lat ,location{ long: 13 }.long  ))
+
+}
+//=========================================================
+//function on struct
+func (loc location) newLocation() location {
+
+	return location{lat: loc.lat + 10, long: loc.long + 12}		
+}
+
+

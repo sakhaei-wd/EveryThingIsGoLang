@@ -1,0 +1,91 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	//exercise1
+	//create a func with the identifier foo that returns an int
+	//create another func with the identifier bar returns an int and a string
+	//call both functions
+	//print out their values
+	year, msg := bar()
+	fmt.Println(foo(), year, msg)
+
+	//exercise2
+	//create a func with the identifier foo that
+	//takes a variadic parameter of type int
+	//pass in a value of type []int into your func (unfurl the []int)
+	//returns the sum of all values of type int passed in
+	numArr := []int{1, 2, 4, 5, 6, 77, 8, 99}
+	fmt.Println("sum of ex2 : ", foo2(numArr...))
+
+	//create a func with the identifier bar that
+	//takes in a parameter of type []int
+	//returns the sum of all values of type int passed in
+	numArr2 := []int{1, 2, 4, 5, 6, 77, 8, 99}
+	fmt.Println("sum of ex2 : ", bar2(numArr2))
+
+	//exercise3
+	//use the "defer" keyword to show that a deferred func runs after the func containing it exits
+	defer testDefer("CR7")
+	testDefer("Lionel Messi")
+
+	//exercise4
+	//create a user defined struct with
+	//the identifier "person"
+	//the fields :
+	//first | last | age
+	//attach a method to type person with
+	//the identifier "speak"
+	//the method should have the person say their name and age
+	
+	//create a value of type person
+	//call the method from the value of type person
+	p1:= person{first: "Mr", last: "Maker" , age: 25}
+	p1.ex3speak()	
+}
+
+type person struct {
+	first string
+	last  string
+	age   int
+}
+
+func foo() int {
+	return 1400
+}
+
+func bar() (int, string) {
+	return 1370, " is my birthyear"
+}
+
+func foo2(allNums ...int) int {
+	sum := 0
+	for _, v := range allNums {
+		sum += v
+	}
+	return sum
+}
+
+func bar2(allNums []int) int {
+	sum := 0
+	for _, v := range allNums {
+		sum += v
+	}
+	return sum
+}
+
+func testDefer(name string) {
+	fmt.Println("My Name is ", name)
+}
+
+func testForDefer(name string) {
+	fmt.Println("My Name is ", name, " runs before defer always")
+}
+
+func (p person) ex3speak() {
+	fmt.Printf("\n my name is %v %v, i'm %v years old ", p.first, p.last, p.age)
+}

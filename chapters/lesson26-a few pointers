@@ -1,0 +1,187 @@
+package main
+
+import (
+	"fmt"
+)
+
+Walk around any neighborhood
+and you’ll likely
+encounter homes with individual
+addresses and street
+signs to guide you on your
+way. You may happen upon a
+closed-down shop with an
+apologetic sign: “Sorry, we’ve
+moved!” Pointers are a bit
+like the sign in the store window
+that directs you to a different
+address.
+
+
+
+//============================ what's pointer ? ==============================
+A pointer is a variable that points to the address of another variable. In computer science,
+pointers are a form of indirection, and indirection can be a powerful tool.
+
+
+
+//the ampersand and the asterix ( & and * ) ================================
+Pointers in Go adopt the well-established syntax used by C. There are two symbols to be
+aware of, the ampersand (&) and the asterisk (*), though the asterisk serves a dual purpose,
+as you’ll soon see.
+
+
+//===============================================
+The following listing prints a memory
+address as a hexadecimal number, though the address on your computer will differ
+
+answer := 42
+fmt.Println(&answer)		//Prints 0x1040c108
+
+
+//============== dereferencing =================
+answer := 42
+fmt.Println(&answer)			//print 0x1040c108
+address := &answer
+fmt.Println(*address)			//print 42 (dereferencing)
+
+//===============================================
+//=============== pointer type ==================
+answer := 42
+address := &answer
+fmt.Printf("address is a %T\n", address) //Prints address is a *int
+ 
+//===============================================
+//declaring a pointer 
+canada := "Canada"
+var home *string
+fmt.Printf("home is a %T\n", home)
+home = &canada
+fmt.Println(*home)
+
+//================= 
+//dereference vs. denote
+An asterisk prefixing a type denotes a pointer type (*string), whereas an asterisk prefixing a variable
+name  (*home) is used to dereference the value that variable points to.
+
+//====================================================
+//changes in pointer result to change in value too (very important!)
+canada := "Canada"
+pointer := &canada
+*pointer = "Sweden"  //same as canada = "Sweden"
+
+fmt.Print(*pointer) //print Sweden
+
+//====================================================
+//pointer to the struct
+type person struct {
+	name, superpower string
+	age int
+}
+
+timmy := &person{
+	name: "Timothy",
+	age: 10,
+}
+
+timmy.superpower = "flying"
+fmt.Printf("%+v\n", timmy) //Prints &{name:Timothy 	superpower:flying age:10}
+//===================================================
+//change in pointers results change in values too
+
+type person struct {
+	FName string
+	LName string
+	Age int
+}
+
+//pointer receiver
+func Grow(p *person) int {
+	p.Age++
+	return p.Age
+}
+
+John := person{FName: "Mr" , LName: "Maker" ,Age: 14}
+fmt.Println(Grow(&John)) //print 15
+fmt.Print(John.Age)		 //print 15
+
+
+//if we didn't use &John and *person
+//we have this result : 	print 15	
+//							print 14
+//By dereferencing the memory address, a function can mutate the value a pointer points to 
+
+//======================================================
+//interior pointers : 
+
+//human is a parent struct of male , but it can used male function with poniter
+man := human{male : male{Age: 15}}.male
+fmt.Print(Grow(&man))
+
+
+type human struct{
+	male
+	Age int
+}
+
+type male struct {
+	FName string
+	LName string
+	Age int
+}
+
+func Grow(p *male) int {
+	p.Age++
+	return p.Age
+}
+
+//=================================
+// Mutating arrays
+
+type human struct {
+	male
+	Age        int
+	chessboard []int
+}
+
+func (chess human) MoveHorse()  chessboard{
+	chess.chessboard = append(chess.chessboard, 1, 2, 3, 4, 5)
+	return chess.chessboard
+	
+}
+
+func main(){
+	man := human{male: male{Age: 15}}
+	man.chessboard = []int {9,8,7,6}
+	fmt.Print(man.chessboard) //print [9 8 7 6]
+	fmt.Print(man.MoveHorse()) //print [9 8 7 6 1 2 3 4 5]
+
+	//the array of chessboard append new items
+}
+
+
+//=========================================
+//Modifying a slice
+func reclassify(planets *[]string) {
+	*planets = (*planets)[0:8]
+}
+
+func main() {
+planets := []string {
+"Mercury", "Venus", "Earth", "Mars",
+"Jupiter", "Saturn", "Uranus", "Neptune",
+"Pluto",
+}
+
+reclassify(&planets)
+fmt.Println(planets) //Prints [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
+} 
+
+
+//========================================
+
+
+
+
+
+

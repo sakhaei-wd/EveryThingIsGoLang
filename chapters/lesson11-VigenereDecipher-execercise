@@ -1,0 +1,38 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+// decipherLetter deciphers a letter enciphered with the Vigenère cipher
+// Given an enciphered rune and an key rune, it returns a plain-text
+// rune.
+// ASCII values: A = 65, D = 68
+func decipherLetter(cipher, key rune) rune {
+	const asciiA rune = 65
+	const numLetters = 26
+
+	plainTextIndex := cipher - key
+	asciiLetter := (plainTextIndex + numLetters)%numLetters + asciiA
+	return asciiLetter
+}
+
+// decipher takes a message and a keyword and returns the plaintext message
+func decipher(message, kw string) string {
+	var plainText strings.Builder
+	kwChars := []rune(kw)
+
+	for i, cipherChar := range message {
+		key := i % len(kwChars)
+		plainText.WriteRune(decipherLetter(cipherChar, kwChars[key]))
+	}
+
+	return plainText.String()
+}
+
+func main() {
+	cipherText := "CSOITEUIWUIZNSROCNKFD"
+	keyword := "GOLANG"
+	fmt.Println(decipher(cipherText, keyword))
+}

@@ -1,0 +1,171 @@
+package main
+
+import (
+	"fmt"
+)
+
+//===========================================================
+//================== what's composition? ====================
+ In the world of object-oriented programming, objects are composed of smaller objects in
+ the same way. Computer scientists call this object composition or simply composition.
+
+ Designing hierarchies can be difficult. A hierarchy of the animal kingdom
+would attempt to group animals with the same behaviors. Some mammals walk on
+land while others swim, yet blue whales also nurse their young. How would you organize
+them? It can be difficult to change hierarchies too, as even a small change can have a
+wide impact.
+
+Composition is a far simpler and more flexible approach: implement walking, swimming,
+nursing, and other behaviors and associate the appropriate ones with each animal.
+As a bonus, if you design a robot, the walking behavior can be reused.
+
+//===========================================================
+// structs inside of structs  (composition)
+type report struct {
+	sol         int
+	temperature temperature
+	location    location
+}
+type temperature struct {
+	high, low celsius
+}
+type location struct {
+	lat, long float64
+}
+type celsius float64
+
+//====================================================
+//complex example of structs inside of structs
+
+myAnalyze := Analyze{
+	AnalyzePaper: []report{
+		{sol: 12},
+		{sol: 13,
+			temperature: temperature{high: 100, low: 20},
+		}},
+	CurrentTemp: location{lat: 12, long: 13},
+	ResultNum: []map[string]int{
+		{"brazil": 1, "croatia": 2},
+		{"pizza": 100, "hamburger ": 200}},
+}
+fmt.Print(myAnalyze)
+
+//also we can use method of field : method forwarding (forward method from celcius to analyze struct)
+		fmt.Print(myAnalyze.celsius.CalculateTemp())
+}
+
+type Analyze struct {
+	
+AnalyzePaper []report
+ResultNum    []map[string]int
+CurrentTemp  location
+celsius
+}
+
+type report struct {
+sol         int
+temperature temperature
+location    location
+}
+type temperature struct {
+high, low celsius
+}
+type location struct {
+lat, long float64
+}
+type celsius float64
+
+func (temp celsius) CalculateTemp() celsius {
+	return temp + 100
+}
+
+//====================================================
+//Struct embedding
+//means : if you name field same as another struct name , you don't need to set the type of field
+type report struct {
+	sol int
+	temperature 
+	location //here  location is of location type 
+	}
+
+	//and use like this
+	report := report{
+		sol: 15,
+		location: location{-4.5895, 137.4417},
+		temperature: temperature{high: -1.0, low: -78.0},
+		}
+
+
+//also embedding another type
+type sol int
+type report struct {
+sol //here sol is embedding
+location
+temperature
+}
+
+//====================================================
+
+//Experiment: gps.go
+//Write a program with a gps structure for a Global Positioning System (GPS). This struct
+//should be composed of a current location, destination location, and a world.
+//Implement a description method for the location type that returns a string containing the
+//name, latitude, and longitude. The world type should implement a distance method
+//using the math from lesson 22.
+//Attach two methods to the gps type. First, attach a distance method that finds the distance
+//between the current and destination locations. Then implement a message method that
+//returns a string describing how many kilometers remain to the destination.
+//As a final step, create a rover structure that embeds the gps and write a main function to
+//test everything out. Initialize a GPS for Mars with a current location of Bradbury Landing (-4.5895, 137.4417) and a destination of Elysium Planitia (4.5, 135.9). Then create a
+//curiosity rover and print out its message (which forwards to the gps).
+
+
+type gps struct {
+	currentLoc     location
+	destinationLoc location
+	world
+}
+
+type location struct {
+	name      string
+	lat, long float64
+}
+
+type world struct {
+	radius float64
+}
+
+type rover struct{
+	gps 
+}
+
+func (item location) description() string {
+	return fmt.Sprintf("%v (%.1fº, %.1fº)", item.name, item.lat, item.long)
+}
+
+func (item world) Distance() string {
+	return fmt.Sprintf("%v" , item.radius)
+}
+
+func (item gps) Distance() float64 {
+	return item.currentLoc.lat - item.destinationLoc.lat
+}
+func (item gps) Message() string {
+	return fmt.Sprintf("%v kilometers left", item.Distance())
+}
+
+
+func main(){
+	mars := gps{
+		currentLoc: location{name: "Bradbury Landing" , lat:-4.5895 , long:137.4417 },
+		destinationLoc: location{name: "Elysium Planitia" , lat: 4.5 , long: 135.9},
+	}
+
+	curiosity := rover{gps: mars}.Message()
+	fmt.Print(curiosity)
+}
+
+
+
+
+

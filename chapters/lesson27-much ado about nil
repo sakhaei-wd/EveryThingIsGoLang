@@ -1,0 +1,41 @@
+package main
+
+import (
+	"fmt"
+)
+
+
+//what's nill ? =====================
+The word nil is a noun that means nothing or zero. In the Go programming language,
+nil is a zero value
+
+Many programming languages incorporate the concept of nil, though they may call it
+NULL, null, or None.
+
+
+//Nil leads to panic: =====================
+var nowhere *int
+fmt.Println(nowhere)		//prints <nil>
+fmt.Println(*nowhere)		//panic : nil pointer dereference (error)
+
+//=========================================
+To be fair, programs can crash for many reasons, not only because of nil pointer dereferences.
+For example, divide by zero also causes a panic, and the remedy is similar
+
+// nill receivers =========================
+func main() {
+	var nobody *person
+	fmt.Print(nobody)		//Prints <nil>
+	nobody.birthday()
+}
+
+type person struct {
+	age int			
+}
+
+func (p *person) birthday() {
+	p.age++				   //nil pointer dereference
+}
+
+
+

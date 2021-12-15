@@ -1,0 +1,131 @@
+package main
+
+import (
+	"fmt"	
+)
+
+//=======================================
+//Introducing a little structure:
+
+var curiosity struct {
+	lat float64
+	long float64
+	}
+	curiosity.lat = -4.5895    		//Assigns values to 
+	curiosity.long = 137.4417		//fields of the structure
+	fmt.Println(curiosity.lat, curiosity.long) 		//Prints -4.5895 137.4417
+	fmt.Println(curiosity)			//Prints {-4.5895 137.4417}
+
+//=======================================
+//Location type
+type location struct {
+	lat float64
+	long float64
+	}
+	var spirit location
+	spirit.lat = -14.5684 			//Reuses the location type
+	spirit.long = 175.472636		//Reuses the location type
+	var opportunity location
+	opportunity.lat = -1.9462		//Reuses the location type
+	opportunity.long = 354.4734		//Reuses the location type
+	fmt.Println(spirit, opportunity)
+
+
+//======================================
+//Composite literal (:=) with field-value pairs:	
+type location struct {
+	lat, long float64
+	}
+	opportunity := location{lat: -1.9462, long: 354.4734}
+	fmt.Println(opportunity)
+	insight := location{lat: 4.5, long: 135.9}
+	fmt.Println(insight)
+
+
+//======================================
+// No matter how you initialize a structure, you can modify the %v format verb with a plus
+// sign + to print out the field names, as shown in the next listing. This is especially useful
+// for inspecting large structures.
+
+curiosity := location{-4.5895, 137.4417}
+fmt.Printf("%v\n", curiosity)		//Prints {-4.5895 137.4417}
+fmt.Printf("%+v\n", curiosity)		//Prints {lat:-4.5895	long:137.4417}
+
+//======================================
+//A slice of locations or using struct as a slice
+type location struct {
+	name string
+	lat  float64
+	long float64
+}
+locations := []location{
+	{name: "Bradbury Landing", lat: -4.5895, long: 137.4417},
+	{name: "Columbia Memorial Station", lat: -14.5684, long: 175.472636},
+	{name: "Challenger Memorial Station", lat: -1.9462, long: 354.4734},
+}
+
+//======================================
+//Marshalling location 
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+func main() {
+
+	type location struct { Lat, Long float64 } //!important : Fields must begin with an uppercase letter.
+
+	curiosity := location{-4.5895, 137.4417}
+	bytes, err := json.Marshal(curiosity)
+	exitOnError(err)
+	fmt.Println(string(bytes))
+}
+
+// exitOnError prints any errors and exits.
+func exitOnError(err error) {
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+}
+
+//==============================================================
+//Go’s json package requires that fields have an initial uppercase letter and multiword
+//field names use CamelCase by convention
+
+//JSON stands for JavaScript Object Notation.
+//==============================================================
+
+//==============================================================
+//Customizing location fields (alter the field names in print)
+
+type location struct {
+	Lat  float64 `json:"latitude"`       //Struct tags alter	
+	Long float64 `json:"longitude"`	     //the output.
+}
+
+
+curiosity := location{-4.5895, 137.4417}
+bytes, err := json.Marshal(curiosity)
+exitOnError(err)
+fmt.Println(string(bytes))			//Prints : {"latitude":-4.5895, "longitude":137.4417}
+
+//The fields of a structure can be tagged with the field names you want the json package to use.
+//============================================
+
+//============================================
+//As the name implies, struct tags are only for the fields of structures, though json.Marshal
+//will encode other types.
+//============================================
+
+
+//Experiment: landing.go
+
+//Write a program that displays the JSON encoding of the three rover landing sites in listing
+//21.8. The JSON should include the name of each landing site and use struct tags as
+//shown in listing 21.10.
+//To make the output friendlier, make use of the MarshalIndent function from the json
+//package.
+
+

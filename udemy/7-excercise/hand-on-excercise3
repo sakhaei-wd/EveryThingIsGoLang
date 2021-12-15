@@ -1,0 +1,22 @@
+package main
+import (
+  "fmt"
+)
+
+//typed constant
+const (
+    name string = "mamad"
+    age int = 20
+)
+
+//untyped constant
+const (
+	firstName = "reza"
+	height = 202
+)
+
+func main() {
+	fmt.Print(name)
+
+	fmt.Println(height)
+}

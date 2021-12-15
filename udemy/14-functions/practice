@@ -1,0 +1,82 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	//syntax of function
+	//func (r receiver) identitifier (parameters) (return (s)) {...}
+	bar("Jimmy")
+	s := woo("Tommy")
+	fmt.Println(s)
+
+	x := sum(1, 2, 3, 4, 6, 7)
+	fmt.Println("summary of nums is : ", x)
+
+	//unfurling a slice (means pass argument like this y...)
+	y := []int{1, 2, 34, 4, 5, 67}
+	//did you know this ? that we can pass array of int as a variadic int params?
+	fmt.Println("summary of nums is : ", sum(y...))
+
+	//also noting , cause variadic means nothing or something
+	fmt.Println("summary of nums is : ", sum())
+
+	//use defer :
+	//jimmy prints after hello , actually after all funcs in main run, why? because of defer ,
+	//defer defer statements delay the execution of the function or method or an anonymous method
+	//until the nearby functions returns. In other words, defer function or method call arguments evaluate instantly,
+	//but they don't execute until the nearby functions returns
+	
+	//* it uses when we want to close all opened functions and save our produced resource in memory
+	defer bar("Jimmy")
+	woo("Hello")
+
+	//calling method
+	sa1 := secretAgent{firstName: "James", lastName: "Bond"}
+	sa1.Talk()
+	
+	//value can be more than one type !
+	sa2:= secretAgent{firstName: "Lionel", lastName: "Messi"}
+	//sa2 is secretAgent and also Human , because talk is defined in human interface
+	sa2.Talk()
+}
+
+//everything in Go is PASS BY VALUE
+func bar(s string) {
+	fmt.Println("Hello ", s)
+}
+
+func woo(s string) string {
+	return "Hello" + s
+}
+
+//variadic parameters
+func sum(x ...int) int {
+	fmt.Printf("%T", x)
+
+	var sum int = 0
+	for i, v := range x {
+		sum += v
+		fmt.Printf("for item %v the value is %v \n", i, v)
+	}
+	return sum
+}
+
+type secretAgent struct{
+	firstName string
+	lastName string
+}
+
+//method
+func (s secretAgent) Talk(){
+	fmt.Println("I'm ", s.firstName, " " ,s.lastName)
+}
+
+//interface , don't forget : a value can be more than one type
+//also remember this pattern for all declarations in go : 
+//keyword identifier type > type human interface (interface is type in go)
+type human interface{
+	Talk() 
+}
+

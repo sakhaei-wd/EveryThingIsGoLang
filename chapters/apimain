@@ -1,0 +1,136 @@
+package appmain
+
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+
+	"github.com/gorilla/mux"
+)
+
+//make DTO as JSON Variable
+type Order struct {
+	Id          string `json:"Id"`
+	UserId      string `json:"UserId"`
+	Url         string `json:"Url"`
+	Amount      int32  `json:"Amount"`
+	Description string `json:"Description"`
+	Create_At   string `json:"Create_At"`
+	Status      string `json:"Status"`
+}
+
+type Status struct {
+	Id    string `json:"Id"`
+	Title string `json:"Title"`
+}
+
+// let's declare a global Order array
+// that we can then populate in our main function
+// to simulate a database
+var OrderList []Order
+
+func AddOrder(w http.ResponseWriter, r *http.Request) {
+	// get the body of our POST request
+	// unmarshal this into a new Article struct
+	// append this to our Orders array.
+	reqBody, _ := ioutil.ReadAll(r.Body)
+	var myOrder Order
+	json.Unmarshal(reqBody, &myOrder)
+	// update our global Orders array to include
+	// our new order
+	OrderList = append(OrderList, myOrder)
+	json.NewEncoder(w).Encode(myOrder)
+}
+
+func GetAllOrders(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Endpoint Hit: GetAllOrders")
+	json.NewEncoder(w).Encode(OrderList)
+}
+
+func GetOrderById(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	key := vars["id"]
+
+	for _, order := range OrderList {
+		if order.Id == key {
+			json.NewEncoder(w).Encode(order)
+		}
+	}
+}
+
+func UpdateOrderStatus(w http.ResponseWriter, r *http.Request) {
+	orderId := mux.Vars(r)["id"]
+	var updatedOrder Order
+
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Fprintf(w, "Kindly enter data with the status and id only in order to update")
+	}
+
+	json.Unmarshal(reqBody, &updatedOrder)
+
+	for i, singleOrder := range OrderList {
+		if singleOrder.Id == orderId {
+			singleOrder.Status = updatedOrder.Status
+			OrderList = append(OrderList[:i], singleOrder)
+			json.NewEncoder(w).Encode(singleOrder)
+		}
+	}
+}
+
+func UpdateOrderPrice(w http.ResponseWriter, r *http.Request) {
+	orderId := mux.Vars(r)["id"]
+	var updatedOrder Order
+
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Fprintf(w, "Kindly enter data with the amount and id only in order to update")
+	}
+
+	json.Unmarshal(reqBody, &updatedOrder)
+
+	for i, singleOrder := range OrderList {
+		if singleOrder.Id == orderId {
+			singleOrder.Amount = updatedOrder.Amount
+			OrderList = append(OrderList[:i], singleOrder)
+			json.NewEncoder(w).Encode(singleOrder)
+		}
+	}
+}
+
+func handleAPIRequests() {
+
+	// creates a new instance of a mux router
+	myRouter := mux.NewRouter().StrictSlash(true)
+	// finally, instead of passing in nil, we want
+	// to pass in our newly created router as the second
+	// argument
+
+	myRouter.HandleFunc("/getAll", GetAllOrders).Methods("GET")
+	myRouter.HandleFunc("/getOrderById/{id}", GetOrderById).Methods("GET")
+	myRouter.HandleFunc("/add", AddOrder).Methods("POST")
+	myRouter.HandleFunc("/updatePrice/{id}", UpdateOrderPrice).Methods("PATCH")
+	myRouter.HandleFunc("/updateStatus/{id}", UpdateOrderStatus).Methods("PATCH")
+
+	http.Handle("/", http.FileServer(http.Dir("./static")))
+
+	// http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	// 	http.ServeFile(w, r, r.URL.Path[1:])
+	// })
+
+	log.Fatal(http.ListenAndServe(":10000", myRouter))
+
+}
+
+func appmain() {
+
+	OrderList = []Order{
+		Order{Id: "1", UserId: "11", Url: "http://amazon.com/123",
+			Amount: 3000, Description: "Test", Create_At: "2020/01/01"},
+	}
+
+	handleAPIRequests()
+
+}

@@ -1,0 +1,78 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+type kelvin float64
+
+func fakeSensor() kelvin {
+	return kelvin(rand.Intn(151) + 150)
+}
+
+func realSensor() kelvin {
+	return 0
+}
+
+func main() {
+
+	sensor := fakeSensor
+	fmt.Println(sensor())
+
+	sensor = realSensor
+	fmt.Println(sensor())
+
+	//use of function with function argument
+	//note : function argument doesn't need () to call , as you see here
+	fmt.Print(SpeedInKmh(100, passedKm))
+}
+
+//function with function as argument
+type ms int
+
+func SpeedInKmh(speed ms, passedWay func() int) ms {
+	return speed + ms(passedWay())
+}
+
+func passedKm() int {
+	return 200
+}
+
+//function with a function type argument
+type height func() int //function type
+func CalculateHeight(totalHeight height) avg {
+	return avg(totalHeight() + 100)
+}
+
+//instead of : func CalculateHeight(totalHeight func() int) ...
+
+//anonymous function --------------------
+var f = func() {
+	fmt.Println("Dress up for the masquerade.")
+}
+
+func main() {
+	f()
+}
+
+////-------------------------------------
+//// closure and anonymous functions 
+type kelvin int32
+type sensor func() kelvin
+
+func realSensor() int {
+	return 1
+}
+
+//holy shit ! 
+func fakeSensor(sensor1 sensor , sensor2 sensor) sensor {
+	//because of sensor return type we should call anonymous function here
+	
+	return func() kelvin {
+		return kelvin(realSensor()) + kelvin(12)
+	}
+}
+
+///------------------------------------
+

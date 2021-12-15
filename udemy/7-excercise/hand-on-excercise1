@@ -1,0 +1,15 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	//hand of excercise - 1
+	//print a number in decimal , binary and hexadecimal mode
+	x := 1024
+	fmt.Printf("%d\n", x) //decimal mode
+	fmt.Printf("%b\n", x) //binary mode
+	fmt.Printf("%x\n", x) //hex mode
+}

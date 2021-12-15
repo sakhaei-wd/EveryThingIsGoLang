@@ -1,0 +1,56 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	kelvin := 294.0
+	celsius := kelvinToCelsius(kelvin)
+	fmt.Print(kelvin, "º K is ", celsius, "º C")
+
+	//A Celsius type: celsius.go
+	type celsius float64 //The underlying type is float64.
+	var temperature celsius = 20
+	fmt.Println(temperature) //prints 20
+
+	//types can't be mixed
+	type celsius float64
+	type fahrenheit float64
+	var cel celsius = 20
+	var fah fahrenheit = 20
+	if cel == fah {
+	}
+	cal += fah
+	//invalid operation:  mismatched types celsius and fahrenheit
+
+	var c celsius = 127.0
+	k := celsiusToKelvin(c)
+	fmt.Print(c, "º C is ", k, "º K")
+	//Prints 127º C is 400.15º K
+
+}
+
+type celsius float64
+type kelvin float64
+
+func celsiusToKelvin(c celsius) kelvin {
+	return kelvin(c + 273.15)
+}
+
+//kelvinToCelsius function
+func (k kelvin) celsius() celsius {
+	return celsius(k - 273.15)
+}
+
+//celsius method on the kelvin type
+func celsius(k kelvin) celsius {
+	return celsius(k - 273)
+}
+
+type fahrenheit float64
+
+// celsius converts ºF to ºC
+func (f fahrenheit) celsius() celsius {
+	return celsius((f - 32.0) * 5.0 / 9.0)
+}

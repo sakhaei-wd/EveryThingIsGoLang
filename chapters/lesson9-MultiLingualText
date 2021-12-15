@@ -1,0 +1,74 @@
+package main 
+
+import (
+	"fmt"
+	"unicode/utf8"
+)
+
+func lesson9() {
+	//peace := "peace"
+	//var peace = "peace"
+	//var peace string = "peace"
+
+	fmt.Println("peace be upon you\nupon you be peace")
+	//print : peace be upon you
+	//upon you be peace
+
+	fmt.Println(`strings can span multiple lines with the \n escape sequence`)
+	//print : strings can span multiple lines with the \n escape sequence
+
+	fmt.Println(`
+				peace be upon you
+				upon you be peace`)
+	//print : peace be upon you
+	//upon you be peace
+
+	fmt.Printf("%v is a %[1]T\n", "literal string")
+	fmt.Printf("%v is a %[1]T\n", `raw string literal`)
+
+	var pi rune = 960
+	var alpha rune = 940
+	var omega rune = 969
+	var bang byte = 33
+	fmt.Printf("%v %v %v %v\n", pi, alpha, omega, bang)
+	//Prints 960 940 969 33
+
+	fmt.Printf("%c%c%c%c\n", pi, alpha, omega, bang)
+	//Prints πάω!
+
+	//grade := 'A'
+	//var grade = 'A'
+	//var grade rune = 'A'
+
+	message := "shalom"
+	c := message[5]
+	fmt.Printf("%c\n", c)
+	//Prints m
+
+	var star byte = '*'
+	fmt.Printf("%c %[1]v\n", star)
+	//Prints * 42
+
+	smile := ''
+	fmt.Printf("%c %[1]v\n", smile)
+	//Prints  128515
+
+	acute := 'é'
+	fmt.Printf("%c %[1]v\n", acute)
+	//Prints é 233
+
+	testVal := 'a'
+	testVal = testVal + 3
+	fmt.Printf("%c", testVal)
+
+	gval := 'g'
+	gval = gval - 'a' + 'A'
+	fmt.Printf("%c", gval)
+
+	question := "¿Cómo estás?"
+	fmt.Println(len(question), "bytes") //Prints 15 bytes
+	fmt.Println(utf8.RuneCountInString(question), "runes") //Prints 12 runes
+	decodeVal, size := utf8.DecodeRuneInString(question) //Prints First	rune: ¿ 2 bytes
+	fmt.Printf("First rune: %c %v bytes", decodeVal, size)
+
+}

@@ -1,0 +1,78 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+dwarfs := []string{"Ceres", "Pluto", "Haumea", "Makemake", "Eris"}
+dwarfs = append(dwarfs, "Orcus")
+fmt.Println(dwarfs)
+
+
+//append to slices and capacity
+planets := []string{
+	"Mercury", "Venus", "Earth", "Mars",		
+}
+
+planets = append(planets, "Pluto", "October" ) //capacity : 10 , length : 6
+fmt.Print(cap(planets), len(planets))
+
+planets = append(planets, "November") //capacity : 10 , length : 7 (as you see capacity didn't increased)
+
+//cap() return capacity of array
+//when we use append on a array for the first time, the capacity will become double
+//if you use append again, the capacity will not increased until the current capacity filled with items
+
+
+//capacity after slicing 
+//by enter third parameter you can set your exact capacity : 
+planets := []string{
+"Mercury", "Venus", "Earth", "Mars",
+"Jupiter", "Saturn", "Uranus", "Neptune",
+}
+terrestrial := planets[0:4:4] //4 
+fmt.Println(cap(terrestrial)) //prints 4
+	
+
+//Preallocate slices with make
+dwarfs := make([]string, 0, 10) // 0 is for items and 10 is capacity
+dwarfs = append(dwarfs, "Ceres", "Pluto", "Haumea", "Makemake", "Eris")
+
+
+//========= variadic function with array return value
+func Variadic(listOfNames ...string) []string {
+	var funcNames string
+	for index, item := range listOfNames {
+		if index < len(listOfNames) - 1{
+			funcNames += (item + "-")
+		} else {
+			funcNames += (item)
+		}
+	}
+	return []string{funcNames}
+}
+
+fmt.Print(Variadic("ali" , "reza" , "hassan" , "majid" , "karim"))
+//print  : [ali-reza-hassan-majid-karim]
+
+
+
+
+//excercise : Experiment: capacity.go (page 145)
+//Write a program that uses a loop to continuously append an element to a slice. Print out
+//the capacity of the slice whenever it changes. Does append always double the capacity
+//when the underlying array runs out of room? 
+
+myArr := make([]string, 0, 1)
+	var initialCapacity = 1
+
+	for i := 0; i < 10; i++ {
+		myArr = append(myArr, "item")
+		cap := cap(myArr)
+		if (cap > initialCapacity){
+			initialCapacity = cap
+			fmt.Printf("new capacity is %v for array %v \n", cap, myArr)
+		}
+
+	}

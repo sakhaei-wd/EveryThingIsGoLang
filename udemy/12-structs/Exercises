@@ -1,0 +1,129 @@
+package main
+
+import (
+	"fmt"
+)
+
+//ninja-level-5
+func main() {
+
+	//exercise 1
+	//create your own type "person" which will have an underlying type
+	//of "struct" so that it can store the following data :
+	//first name / last name / favorite ice cream flavors
+
+	//create two VALUES of TYPE person, print out the values, ranging over the
+	//elements in the slice
+	type person struct {
+		firstName       string
+		lastName        string
+		favoriteFlavors []string
+	}
+
+	p1 := person{
+		firstName:       "Cris",
+		lastName:        "Ronaldo",
+		favoriteFlavors: []string{"Spicy", "Chocolate"},
+	}
+	p2 := person{
+		firstName:       "Lionel",
+		lastName:        "Messi",
+		favoriteFlavors: []string{"Spicy", "Hot"},
+	}
+
+	for i, v := range p1.favoriteFlavors {
+		fmt.Printf("%v %v ", i, v)
+	}
+	fmt.Println(p1, p2)
+
+	//exercise 2
+	//  take the code from the previous exercise, then store the values
+	//  of type person in a map with the key of last name. access each value in
+	//  the map. print out the values, ranging over the slice
+	fmt.Println("=========== exercise 2 ===========")
+	customMap := map[string]person{
+		p1.lastName: p1,
+		p2.lastName: p2,
+	}
+
+	for i, v := range customMap {
+		fmt.Println(i, v)
+		for i, item := range v.favoriteFlavors {
+			fmt.Printf("%v %v \n", i, item)
+		}
+		fmt.Println("--------------")
+	}
+
+	//exercise 3
+	//create a new type : vehicle
+	//the underlying type is a struct
+	//the fields are :
+	//doors | color
+	//create 2 new types : truck & sedan
+	//the underlying type of each of these new types is a struct
+	//embed the "vehicle" type in both truck & sedan
+	//give truck the field "fourWheel" which will be set to bool. solution
+
+	//using the vehicle, truck, and sedan structs :
+	//using a composite literal, create a value of type truck and assign values to the fields;
+	//using a composite literal, create a value of type sedan and assign values to the fields
+
+	//print out each of these values
+	//print out a single field from each of these values
+
+	fmt.Println("=========== exercise 3 ===========")
+	type vehicle struct {
+		doors string
+		color string
+	}
+	type truck struct {
+		vehicle
+		fourWheel bool
+	}
+	type sedan struct {
+		vehicle
+	}
+
+	myTruck := truck{
+		vehicle:   vehicle{doors: "2", color: "red"},
+		fourWheel: true,
+	}
+	mySedan := sedan{
+		vehicle: vehicle{doors: "4", color: "gray"},
+	}
+
+	fmt.Println(myTruck)
+	fmt.Println(mySedan)
+	fmt.Println(myTruck.vehicle.color)
+	fmt.Println(mySedan.vehicle.doors)
+
+	//exercise 4
+	//create and use an anonymous struct
+	fmt.Println("=========== exercise 4 ===========")
+	anon := struct {
+		fullName  string
+		favSports []string
+		favTeams  map[int][]string
+	}{
+		fullName:  "MrMaker",
+		favSports: []string{"soccer", "yoga", "hockey"},
+		favTeams: map[int][]string{
+			1: {"RealMadrid", "FC", "FootballTeam"},
+			2: {"Perspolis", "FC", "FootballTeam"},
+		},
+	}
+
+	fmt.Println(anon)
+	for i, v := range anon.favSports {
+		fmt.Println(i, v)
+	}
+	for _, v := range anon.favTeams {
+		fmt.Println(v)
+	}
+
+
+	for i := 0; i < 100; i++ {
+		
+	}
+
+}

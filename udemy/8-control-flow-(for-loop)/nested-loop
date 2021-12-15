@@ -1,0 +1,57 @@
+package main
+
+import (
+	"fmt"
+)
+
+//create a variable of type string using a raw string literal. Print it
+
+func main() {
+	for i := 0; i < 2; i++ {
+		for j := 0; j < 3; j++ {
+			fmt.Print("we are in : ", i, " of ", j, "\n")
+		}
+	}
+
+	x := 1
+	for {
+		if x > 10 {
+			break
+		}
+		fmt.Println(x)
+		x++
+	}
+
+	for i := 0; i < 20; i++ {
+		fmt.Printf("%v\t%#U\n",i,i)
+	}
+
+	//define initial value inside if
+	if y:= 23 ;y==23{
+		fmt.Print("using initialization ", y ,"\n")
+	}
+
+	//if-else
+	if x == 11 {
+		fmt.Println("x = 11")
+	} else if x == 12{
+		fmt.Println("x = 12")
+	} else {
+		fmt.Println("x is not 11 or 12")
+	}	
+	
+	//switch-cases
+	switch x / 2{
+	case 11:
+		fmt.Println("x = 11")
+	case 12:
+		fmt.Println("x = 12")
+	case 13:
+		fmt.Println("x = 13")
+		fallthrough
+	default:
+		fmt.Println("come to default")
+		
+	}
+
+}

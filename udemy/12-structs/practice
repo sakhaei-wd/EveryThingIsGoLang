@@ -1,0 +1,74 @@
+package main
+
+import (
+	"fmt"
+)
+
+type person struct {
+	first string
+	last string
+}
+
+//embeded class
+type secretAgent struct{
+	person
+	ltk bool //license to kill!
+}
+
+func main() {
+	//p1 is a value of type person (pay attention to this names in go)
+	p1 := person {
+		first : "James",
+		last : "Bond",
+	}
+
+	p2 := person {
+		first : "Miss",
+		last : "MoneyPenny",
+	}
+
+	fmt.Println(p1,p2)
+	fmt.Println(p1.first,p2.last)
+
+	//embeded structs
+	sa1 := secretAgent{
+		person : person{
+			first: "James",
+			last : "Bond",
+		},
+		ltk : true,
+	}
+
+	fmt.Println(sa1)
+	fmt.Println(sa1.person.last,sa1.last, sa1.ltk)
+
+	//anonymous structs
+	//you see this form in table driven test 
+	//you want to do that if you don't want to have code pollution, you want to keep 
+	//your code clean
+	sa2 := struct{
+		firstName string
+		lastName string
+	}{
+		firstName:  "Cris",
+		lastName: "Ronaldo",
+	}
+
+	fmt.Println(sa2)
+
+
+	//HouseKeeping
+
+
+}
+
+//struct is :
+//a composite data type or 
+//data structure which allow us to compose together values of different types
+//so it's aggregate datatype , aggregate together differnt data types 
+
+
+//we create VALUES of a certain TYPE that are stored in VARIABLES 
+//and those VARIABLES have IDENTIFIERS 
+
+

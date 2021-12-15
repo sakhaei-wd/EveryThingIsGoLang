@@ -1,0 +1,15 @@
+package main
+import (
+  "fmt"
+)
+
+//create a variable of type string using a raw string literal. Print it
+
+func main() {
+	sample := `"hello , 
+		this is my first
+		 usage of raw
+		 			 string literals"`
+
+					  fmt.Printf(sample)
+}

@@ -1,0 +1,153 @@
+package main
+
+import (
+	"fmt"	
+)
+
+
+//define a map (map is liked enums in c#)
+	temperature := map[string]int{
+		"Earth": 15,
+		"Mars": -65,
+		}
+
+		//use of map item (get)
+		temp := temperature["Earth"]
+		fmt.Printf("On average the Earth is %vº C.\n", temp)
+		//print : 15
+
+		//change map item value (set)
+		temperature["Earth"] = 16
+
+
+		//If you access a key that doesn’t exist in the map, the result is the zero value for the type (int):
+		fmt.Printf(temperature["Moon"]) 
+		//print : 0
+
+
+//======================
+// Go provides the comma, ok syntax, which you can use to distinguish between the "Moon"
+// not existing in the map versus being present in the map with a temperature of 0 C:
+if moon, ok := temperature["Moon"]; ok {  		//The comma, ok syntax
+	fmt.Printf("On average the moon is %vº C.\n", moon)
+	} else {
+	fmt.Println("Where is the moon?")
+	}
+
+	//Prints : Where is the moon?
+
+//=======================================
+//When the delete built-in function removes an element from the map, both planets and planetsMarkII are impacted by the change
+
+	planets := map[string]string{
+		"Earth": "Sector ZZ9",
+		"Mars":  "Sector ZZ9",
+	}
+
+
+	planetsMarkII := planets
+	planets["Earth"] = "whoops"
+	fmt.Println(planets) //Prints map[Earth:whoops Mars:Sector ZZ9]
+	fmt.Println(planetsMarkII)
+	delete(planets, "Earth")  //Removes Earth from the map
+	fmt.Println(planetsMarkII) //Prints map[Mars:Sector ZZ9]
+
+
+//======================================
+// For maps, make only accepts one or two parameters. The second one preallocates space
+// for a number of keys, much like capacity for slices. A map’s initial length will always be
+// zero when using make
+temperature := make(map[float64]int, 8)
+
+//======================================
+//Using maps to count things (use this for solve the experiment : words.go)
+
+temperatures := []float64{
+	-28.0, 32.0, -31.0, -29.0, -23.0, -29.0, -28.0, -33.0,
+}
+
+frequency := make(map[float64]int)
+
+for _, t := range temperatures {
+	frequency[t]++  //Iterates over a slice (index, value)
+}
+for t, num := range frequency { //Iterates over a map (key, value)
+	fmt.Printf("%+.2f occurs %d times\n", t, num)
+	//prints : -28.00 occours 2 times 
+	//			32.00 occours 1 times
+	//			....
+}
+//=======================================
+// a map of slices
+
+temperatures := []float64{
+	-28.0, 32.0, -31.0, -29.0, -23.0, -29.0, -28.0, -33.0,
+}
+
+myMap := make(map[int][]float64)
+
+for index, item := range temperatures {
+	myMap[index] = []float64{item}		
+}
+
+fmt.Print(myMap)
+
+//print : map[0:[-28] 1:[32] 2:[-31] 3:[-29] 4:[-23] 5:[-29] 6:[-28] 7:[-33]]
+
+//=======================================
+//a map of slice (with boolean values)
+temperatures := []int{
+	1, 4, 5, 3, 5, 6, 11,
+}
+
+myMap := make(map[int]bool)
+for index, item := range temperatures {
+	myMap[index] = (item == index + 1)
+}
+
+fmt.Print(myMap)
+//print : map[0:true 1:false 2:false 3:false 4:true 5:true 6:false]
+
+
+//======================================
+//set array values from map and sort
+temperatures := []int{
+	1, 4, 15, 100, 3, 6, 11,
+}
+
+myMap := make([]int, 0)
+
+for _, item := range temperatures {
+	myMap = append(myMap, item)
+
+}
+
+fmt.Println(myMap)
+sort.IntSlice(myMap).Sort()
+fmt.Print(myMap)
+
+//print : [1 4 15 100 3 6 11]
+//		  [1 3 4 6 11 15 100]
+
+//======================================
+//experiments : words.go
+//(use count frequency example that we write above ↑↑↑ )
+
+//Write a function to count the frequency of words in a string of text and return a map
+//of words with their counts. The function should convert the text to lowercase, and
+//punctuation should be trimmed from words. The strings package contains several helpful
+//functions for this task, including Fields, ToLower, and Trim.
+//Use your function to count the frequency of words in the following passage and then
+//display the count for any word that occurs more than once.
+
+     //As far as eye could reach he saw nothing but the stems of the great plants about him
+     //receding in the violet shade, and far overhead the multiple transparency of huge leaves
+     //filtering the sunshine to the solemn splendour of twilight in which he walked. Whenever
+     //he felt able he ran again; the ground continued soft and springy, covered with the same
+     //resilient weed which was the first thing his hands had touched in Malacandra. Once or
+     //twice a small red creature scuttled across his path, but otherwise there seemed to be no
+     //life stirring in the wood; nothing to fear—except the fact of wandering unprovisioned
+     //and alone in a forest of unknown vegetation thousands or millions of miles beyond the
+     //reach or knowledge of man.
+
+	 // 				—C.S. Lewis, Out of the Silent Planet,

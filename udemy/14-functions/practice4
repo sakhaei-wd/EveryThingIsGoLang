@@ -1,0 +1,35 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	//recursion : is a function which call itself for a certain number of times
+	//and you always have to have some ways to stop your recursion fuunction
+
+	fmt.Println(facotrial(4))
+	fmt.Println(loopFact(4))
+
+	//the true sign of a master is somebody who makes the difficult to easy
+}
+
+//classical example of recursion
+func facotrial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * facotrial(n-1)
+}
+
+//but we can implement it with better complexity
+//and easy to understand
+//without use of recursion, which is not good and 'rewind the memory'
+func loopFact(n int) int {
+	total := 1
+	for ; n > 0; n-- {
+		total *= n
+	}
+	return total
+}
