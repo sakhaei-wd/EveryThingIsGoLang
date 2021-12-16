@@ -23,7 +23,7 @@ func main() {
 
 	//exercise 6
 	//build and use anonymous func
-	ex6 := func(x int) int{
+	ex6 := func(x int) int {
 		return x + 2
 	}(14)
 
@@ -31,37 +31,65 @@ func main() {
 
 	//exercise7
 	//assign a func to a variable, then call that func
-	ex7 := func (num int) int{
+	ex7 := func(num int) int {
 		return num + 10
 	}(14)
-	
+
 	fmt.Println(ex7)
 
+	//exercise8
+	//create a func which returns a func
+	//assign the returned func to a variable
+	//call the returned func
+	ex8 := exercise8()
+	fmt.Println(ex8())
+
+	//exercise9
+	//a "callback" is when we pass a func into a func as an argument.
+	//for this exercise, pass a func into a func as an argument
+	res9 := exercise9(concatenator, "brazil", "argentina", "germany")
+	fmt.Printf(res9)
 }
 
+func exercise8() func() string {
+	return func() string {
+		return "here' we're on exercise 8"
+	}
+}
 
+func concatenator(titles ...string) string {
+	res := ""
+	for _, v := range titles {
+		res += (v + " | ")
+	}
+	return res
+}
 
-type shape interface{
+func exercise9(concatFunc func(titles ...string) string, listOfTitles ...string) string {
+	return concatFunc(listOfTitles...)
+}
+
+type shape interface {
 	area() float64
 }
 
-type square struct{
+type square struct {
 	length float64
 }
 
-type circle struct{
+type circle struct {
 	radius float64
 }
 
-func (c circle) area() float64{
+func (c circle) area() float64 {
 	return math.Pi * c.radius * c.radius
 }
 
-func (s square) area() float64{
+func (s square) area() float64 {
 	return s.length * s.length
 }
 
 func info(s shape) {
-	x:= s.area
+	x := s.area
 	fmt.Println(x())
 }
