@@ -1,0 +1,50 @@
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"io"
+	"io/ioutil"
+)
+
+func main() {
+	//m1 := Manager{FullName: "Jack",Age : 40, YearsInCompany: 40 }
+	//EncodeManager(&m1)
+	//fmt.Println(m1)
+	
+
+	// u, err := json.Marshal(Manager{FullName: "Jack",Age : 40, YearsInCompany: 40 })
+    //     if err != nil {
+    //         panic(err)
+    // }
+
+	// reader := bytes.NewReader(u)
+	// reader.Read(u)
+	
+	// fmt.Println(string(u))
+	//fmt.Println(Manager{FullName: "Jack",Age : 40, YearsInCompany: 40 })
+	resultReader, err := EncodeManager(&Manager{FullName: "Jack",Age : 40, YearsInCompany: 40 })
+    result, err := ioutil.ReadAll(resultReader)
+    
+	fmt.Println(result,err)
+}
+
+type Manager struct {
+    FullName       string	 `json:"full_name"`
+    Position       string	 `json:"position"`
+    Age            int32	 `json:"age"`
+    YearsInCompany int32	 `json:"years_in_company"`
+}
+
+func EncodeManager(manager *Manager) (io.Reader,error) {
+
+	u, err := json.Marshal(manager)
+        if err != nil {
+            panic(err)
+    }
+
+	reader := bytes.NewReader(u)
+	reader.Read(u)	
+	return reader,err
+}

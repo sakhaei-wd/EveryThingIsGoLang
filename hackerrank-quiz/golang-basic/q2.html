@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div class="ps-content-wrapper-v0">
+<p>Implement a function Server which runs a server with the following characteristics:</p>
+
+<ul>
+	<li>It accepts values through a channel. Each value is an int32. You should describe a type 'in' and initialize a global variable serverChan</li>
+	<li>Depending upon whether the value is odd or even, it directs them to oddChan and evenChan. </li>
+</ul>
+
+<p> </p>
+
+<p class="section-title">Example</p>
+
+<p><em>arr = [1,2,3,4,5]</em></p>
+
+<p> </p>
+
+<p><em>oddChan</em> receives <em>[1,3,5] </em>and <em>evenChan</em> receives <em>[2,4]. </em>The values are printed to STDOUT.</p>
+ 
+
+<p class="section-title">Function Description</p>
+
+<p>Complete the function <em>Server</em> in the editor below. The function is void.</p>
+
+<p> </p>
+
+<p>Server has no parameters.</p>
+
+<p> </p>
+
+<p class="section-title">Constraints</p>
+
+<ul>
+	<li>1  ≤ length of arr  ≤ 1000</li>
+	<li> 1 ≤ arr[i]  ≤ 10<sup>7</sup>
+</li>
+</ul>
+
+<p> </p>
+<!-- <StartOfInputFormat> DO NOT REMOVE THIS LINE-->
+
+<details><summary class="section-title">Input Format For Custom Testing</summary>
+
+<div class="collapsable-details">
+<p>The first line contains an integer, <em>n</em>, the number of elements in <em>arr</em>.<br>
+Each line <em>i</em> of the <em>n</em> subsequent lines (where <em>0 ≤ i &lt; n</em>) contains an int32, <em>arr[i]</em>.</p>
+</div>
+</details>
+<!-- </StartOfInputFormat> DO NOT REMOVE THIS LINE-->
+
+<details open="open"><summary class="section-title">Sample Case 0</summary>
+
+<div class="collapsable-details">
+<p class="section-title">Sample Input For Custom Testing</p>
+
+<pre>
+STDIN    Function
+-----    --------
+10   →   arr[] size n = 10
+1    →   arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre>
+
+<p class="section-title">Sample Output</p>
+
+<pre>
+1
+3
+5
+7
+9
+2
+4
+6
+8
+10</pre>
+
+<p class="section-title">Explanation</p>
+
+<p>First the odd and then the even numbers are printed in the order they are extracted from the source array.</p>
+</div>
+</details>
+
+<details><summary class="section-title">Sample Case 1</summary>
+
+<div class="collapsable-details">
+<p class="section-title">Sample Input For Custom Testing</p>
+
+<pre>
+STDIN    Function
+-----    --------
+6     →  arr[] size n = 6
+238   →  arr = [238, 447, 122, 200, -543, 0]
+447
+122
+200
+-543
+0
+</pre>
+
+<p class="section-title">Sample Output</p>
+
+<pre>
+447
+-543
+238
+122
+200
+0
+</pre>
+
+<p class="section-title">Explanation</p>
+
+<p>First the odd and then the even numbers are printed in the order they are extracted from the source array.</p>
+</div>
+</details>
+</div>
+</div></div></section></div></div>
+
+</body>
+</html>

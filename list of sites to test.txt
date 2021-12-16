@@ -1,0 +1,27 @@
+HackerRank certified quiz (which you can pass 1 month later) after every failure
+Linkedin assesment quiz (which you can pass 6 month later!) after every failure
+
+test : 
+https://www.golangdev.in/2021/09/golang-quiz-questions-part-04.html
+https://www.golangdev.in/2021/09/golang-multiple-choice-questions-part-05.html
+https://www.golangdev.in/2021/09/go-online-quiz-part-07.html
+https://www.golangdev.in/2021/09/go-multiple-choice-questions-and.html
+https://www.golangdev.in/2021/09/golang-quiz-questions-part-05.html
+
+https://www.tutorialspoint.com/go/go_online_quiz.htm
+https://app.testdome.com/t
+
+challenges  : 
+https://tutorialedge.net/challenges/go/
+
+====================================================================================
+
+to review famous algorithms : 
+https://github.com/ganelon13/go-algorithms
+
+algorithms with go : 
+https://courses.calhoun.io/courses/cor_algo
+
+https://www.educative.io/blog/50-golang-interview-questions
+
+

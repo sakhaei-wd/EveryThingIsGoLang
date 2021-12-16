@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="ps-content-wrapper-v0">
+<p>Create a JSON-encoding system for objects.</p>
+
+<p> </p>
+
+<p>Write a struct called <em>Manager</em> with fields <em>FullName</em> and <em>Position</em> (both string), then <em>Age</em> and <em>YearsInCompany</em> (both int32) - in that exact order. Also write a function that encodes objects of this struct to an encoded JSON object. It returns an <em>io.Reader</em> with this JSON object. Fields in the JSON object should be renamed as <em>full_name</em>, <em>position</em>, <em>age</em> and <em>years_in_company</em>. Empty fields should be omitted.</p>
+ 
+
+<p class="section-title">Example</p>
+
+<p><span style='font-family: "Whitney SSm A", "Whitney SSm B", AvenirNext-Regular, "Segoe UI", Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 1em;font-weight: normal;'>A Manager is named Chris Smith, the CISO, who is 32 years old. Chris has worked with the company for 5 years. This data should be encoded to </span><em style='font-family: "Whitney SSm A", "Whitney SSm B", AvenirNext-Regular, "Segoe UI", Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 1em;font-weight: normal;'>{"full_name":"Chris Smith","age":32,"position":"CISO","years_in_company":5}</em><span style='font-family: "Whitney SSm A", "Whitney SSm B", AvenirNext-Regular, "Segoe UI", Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 1em;font-weight: normal;'>.</span></p>
+ 
+
+<p class="section-title">Function Description</p>
+
+<p>Complete the function <em>EncodeManager</em> in the editor below.</p>
+
+<p> </p>
+
+<p>EncodeManager has the following parameter:</p>
+
+<p>    <em>manager:</em>  an object of type <em>*Manager</em> (the pointer to the <em>Manager</em>)</p>
+
+<p> </p>
+
+<p>Returns</p>
+
+<p>    <em>io.reader, error:</em>  two objects must be returned</p>
+
+<p class="section-title">Constraints</p>
+
+<ul>
+	<li>1  ≤ length of full_name, position  ≤ 100</li>
+	<li>1  ≤ age, years_in_company  ≤ 100</li>
+</ul>
+
+<p> </p>
+<!-- <StartOfInputFormat> DO NOT REMOVE THIS LINE-->
+
+<details><summary class="section-title">Input Format For Custom Testing</summary>
+
+<div class="collapsable-details">
+<p>The first line contains an string, <em>FullName</em>.<br>
+The second line contains a string, <em>Position</em>.</p>
+
+<p>The third line contains an integer, <em>Age</em>.</p>
+
+<p>The third line contains an integer, <em>YearsInCompany</em>.</p>
+</div>
+</details>
+<!-- </StartOfInputFormat> DO NOT REMOVE THIS LINE-->
+
+<details open="open"><summary class="section-title">Sample Case 0</summary>
+
+<div class="collapsable-details">
+<p class="section-title">Sample Input For Custom Testing</p>
+
+<pre>
+Jack Oliver
+CEO
+44
+0</pre>
+
+<p class="section-title">Sample Output</p>
+
+<pre>
+{"full_name":"Jack Oliver","position":"CEO","age":44}</pre>
+
+<p class="section-title">Explanation</p>
+
+<p>Since <em>YearsInCompany</em> equals 0, the main function will not add it to the object. It should not be present in the output.</p>
+</div>
+</details>
+
+<details><summary class="section-title">Sample Case 1</summary>
+
+<div class="collapsable-details">
+<p class="section-title">Sample Input For Custom Testing</p>
+
+<pre>
+Jack Oliver
+
+44
+8</pre>
+
+<p class="section-title">Sample Output</p>
+
+<pre>
+{"full_name":"Jack Oliver","age":44,"years_in_company":8}</pre>
+
+<p class="section-title">Explanation</p>
+
+<p>Since Position is an empty string, the main function will not add it to the object. It will be empty and should not be present in the output.</p>
+</div>
+</details>
+</div>
+</div></div></section></div></div></div>
+
+    
+</body>
+</html>
