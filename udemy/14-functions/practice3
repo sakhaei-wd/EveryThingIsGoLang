@@ -35,7 +35,7 @@ func sum(x ...int) int {
 	return sum
 }
 
-func evenSum(sum func(x ...int) int, inputNums ...int) int {
+func evenSum(inputFunc func(x ...int) int, inputNums ...int) int {
 
 	eveNum := []int{}
 	for _, v := range inputNums {
@@ -43,7 +43,7 @@ func evenSum(sum func(x ...int) int, inputNums ...int) int {
 			eveNum = append(eveNum, v)
 		}
 	}
-	return sum(eveNum...)
+	return inputFunc(eveNum...)
 }
 
 //closure , using a code block to close the values of variables

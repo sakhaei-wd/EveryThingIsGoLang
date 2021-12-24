@@ -1,43 +1,43 @@
-//Go is object oriented 
-//1. Encapsulation : 
-	//a. state ("fields")
-	//b. behavior ("methods")
-	//c. exported and unexported ; viewable & not viewable
-//2. Reusability :
-	//a. inheritance ("embeded types")
-//3. Polymorphism
-	//a. interfaces 
-//4. Overriding
-	//a. promotion
+Go is object oriented 
+1. Encapsulation : 
+	a. state ("fields")
+	b. behavior ("methods")
+	c. exported and unexported ; viewable & not viewable
+2. Reusability :
+	a. inheritance ("embeded types")
+3. Polymorphism
+	a. interfaces 
+4. Overriding
+	a. promotion
 
-//Traditional OOP
-//1. Classes
-	//a. data structures describing a type of object
-	//b. you can create "instances / objects" from the class / blueprint
-	//c. classes hold both : 
-		// state / data / fields
-		// behaviour / methods
-	//d. public / private
+Traditional OOP
+1. Classes
+	a. data structures describing a type of object
+	b. you can create "instances / objects" from the class / blueprint
+	c. classes hold both : 
+		 state / data / fields
+		 behaviour / methods
+	d. public / private
 
-//2. Inheritance
+2. Inheritance
 
-//In Go : 
-//1. you don't create classes , you create TYPE
-//2. you don't instantiate , you create a VALUE of TYPE
+In Go : 
+1. you don't create classes , you create TYPE
+2. you don't instantiate , you create a VALUE of TYPE
 
-//User Defined Types
-//we can declare a new type
-//foo
-	//the underlying type of foo is int
-	//int conversion
-		// int (my age)
-		// converting type foo to type int
+User Defined Types
+we can declare a new type
+foo
+	the underlying type of foo is int
+	int conversion
+		 int (my age)
+		 converting type foo to type int
 
-//it's bad practical to alias types
-	//one exception
-		//if you need to attach methods to a type
-		//see the time package for an example of this godoc.org/time
-			//type duration int64
-			//duration has methods attached to it
+it's bad practical to alias types
+	one exception
+		if you need to attach methods to a type
+		see the time package for an example of this godoc.org/time
+			type duration int64
+			duration has methods attached to it
 
 	

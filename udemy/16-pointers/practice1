@@ -1,0 +1,45 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	a:= 42
+	fmt.Println(a)
+	fmt.Println(&a) //ampersand shows the address in memory where the value is stored
+	//so & is one operator to see the address 
+
+	//but  the type of the address is a pointer to an int, and that's a completely seperate type
+	fmt.Printf("%T\n", &a)
+
+	//var b int = &a 
+	//we can't do this because type int is not same as type *int
+	//but : b *int = &a is ok , everything in go is passed by value
+
+	//but , let's try this : 
+	b := &a
+	fmt.Println(*b) //this asterix (*) is different to *int 
+	//this asterix gives me the value stored to an address not 'TYPE pointer to the address'
+	//as you see we give 42 , not 0xc00001a098 
+	//so
+	fmt.Println(*&a) //either give me 42 , because i call value of address of a
+	
+	*b = 43
+	fmt.Println(a) //now we see that a is 43 too, because we set a address for b
+
+}
+
+//pointer is just like pointing to some location in memory where a value is stored
+// & give you the address 
+// * give you the value stored at an address where you have the adress
+
+
+//pointers are useful when you have a large chunk of data and you don't
+//want to pass the big chunk of data around through your program? 
+//you just pass the address where the data is stored and all you're doing 
+//is passing an adress
+
+
+
+

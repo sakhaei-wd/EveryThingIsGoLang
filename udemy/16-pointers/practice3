@@ -1,0 +1,42 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func main() {
+
+	//Method Sets
+	//method sets determine that attach a TYPE. it's exactly
+	//is the set of method for a given type? that's the method set
+
+	// a NON-POINTER RECEIVER
+	// works with values that are pointers or non-pointers
+
+	// a POINTER RECEIVER
+	//only works with values that are pointers
+
+	c := circle{5}
+	info(&c)
+	info(c)  //here info is non-pointer receiver
+
+	//check this lesson carefully about all 4 
+	//https://www.udemy.com/course/learn-how-to-code/learn/lecture/11922282#overview
+}
+
+type circle struct {
+	radius float64
+}
+
+type shape interface {
+	area() float64
+}
+
+func (c circle) area() float64 {
+	return math.Pi * c.radius * c.radius
+}
+
+func info(s shape) {
+	fmt.Println("area", s.area())
+}

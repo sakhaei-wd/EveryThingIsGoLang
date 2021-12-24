@@ -22,7 +22,7 @@ func main() {
 	bar(sa1)
 	bar(p2)
 
-	//anonymou funcion : a function which used after it's creation
+	//anonymous funcion : a function which used after it's creation
 	//as it called anonymous it shouldn't have any identifier
 	func (name string){
 		fmt.Println(name)
@@ -34,7 +34,7 @@ func main() {
 	//it can be assign to a variable. like : 
 	f1 := func (name string){
 		fmt.Println("Hello",name)
-	}
+	}	
 	
 	f1("MrMaker")
 
@@ -91,7 +91,6 @@ type person struct {
 func (p person) speak() {
 	fmt.Println(p.firstName, p.lastName, " is a person")
 }
-
 
 //func return func
 func firstFunc(number int) func() int {

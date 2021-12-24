@@ -1,0 +1,45 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	//everything in go is pass by value
+	//Drop any phrase and concepts you may have from other languages,
+	//Pass by reference, pass by copy , forget these phrases.
+	//"pass by value" : that is the only phrase you need to know and remember
+	//that's the only phrase you should use. pass by value, everything in go
+	//is pass by value. in Go what you see is what you get, look at
+	//what's happening , that's what you get
+
+	//چون این نکته خیلی مهمه یه بار برای همیشه به فارسی مینویسم
+	//اگه خود متغیر رو پاس بدی به یه فانکشن  ممکنه مقدارش توی فانکشن عوض شه ولی
+	//برای همیشه عوض نمیشه
+	//اما اگه یه متغیر رو به همراه آدرسش پاس بدی به یه فانکشن یعنی به همراه & مقدارش
+	//برای همیشه عوض میشه
+
+	//پس برای همینه که باید دقت کنیم به چه صورتی متغیرمون رو پاس میدیدم
+	//به فانکشن
+
+	//form 1 : pass a to funcion  ---> foo(a) ---> change it's value just in function (in that scope)
+	//form 2 : pass a with address to function --> foo(&a) --> change it's value for ever (in all scopes)
+
+	x := 0
+	fmt.Println("x before func", x)
+	fmt.Println("x before func", &x) //x with address , so be careful when you pass x with address, you change it's value for ever
+
+	foo(&x)
+	fmt.Println("x after func", x)
+
+	//so when you want to mutate, you use pointer like this func (y *int)
+}
+
+func foo(y *int) {
+
+	fmt.Println("y into func", y)
+	*y = 1
+	fmt.Println("y in func", y)
+}
+

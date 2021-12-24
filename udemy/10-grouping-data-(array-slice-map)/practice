@@ -82,9 +82,6 @@ func main() {
 	for k,v := range m{
 		fmt.Println(k,v)
 	}
-
-
-
 }
 
 //1 - Arrays are fixed-length sequences of items of the same type.
