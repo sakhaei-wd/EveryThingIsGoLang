@@ -1,0 +1,21 @@
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+
+	//exercise4
+	//starting with this code, sort the []int and []strnig for each person
+
+	intArr := []int{1, 4, 61, 13, 53, 7, 9, 12}
+	strArr := []string{"CR7", "Messi", "Holland", "Taremi"}
+
+	sort.Ints(intArr)
+	sort.Strings(strArr)
+
+	fmt.Println(intArr)
+	fmt.Println(strArr)
+}

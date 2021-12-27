@@ -1,0 +1,17 @@
+package main
+
+import (
+	"fmt"	
+	"sort"
+)
+
+func main() {
+	xi := []int{1,14,5,9,3,43}
+	xs := []string{"Messi", "Ronaldo", "Mbape","Levandowski"}
+
+	sort.Ints(xi)
+	sort.Strings(xs)
+
+	fmt.Println(xi)
+	fmt.Println(xs)
+}

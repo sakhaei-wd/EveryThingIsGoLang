@@ -1,0 +1,50 @@
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+type byAge []Person
+
+func (s byAge) Len() int {
+	return len(s)
+}
+func (s byAge) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+func (s byAge) Less(i, j int) bool {
+	if s[i].Age == s[j].Age { //golden trick : hackerRank solution !!
+		return s[i].First < s[j].First
+	} 
+	return s[i].Age < s[j].Age
+}
+
+type byName []Person
+
+func (s byName) Len() int {
+	return len(s)
+}
+func (s byName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+func (s byName) Less(i, j int) bool {
+	return s[i].First < s[j].First
+}
+
+type Person struct {
+	First string
+	Age   int
+}
+
+func main() {
+
+	p1 := Person{First: "James", Age: 32}
+	p3 := Person{First: "CR7", Age: 32}
+	p2 := Person{First: "MoneyPenny", Age: 27}
+
+	people := []Person{p1, p2, p3}
+	//sort.Sort(byName(people))
+	sort.Sort(byAge(people))
+	fmt.Println(people)
+}

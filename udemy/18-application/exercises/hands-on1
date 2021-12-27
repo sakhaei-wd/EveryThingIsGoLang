@@ -1,0 +1,32 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+func main() {
+
+	//exercise1
+	//marshal the []user to JSON. there is a little bit of a curve ball in
+	//this hands-on-exercise - remember to ask yourself you need to EXPORT
+	//a value from a package
+
+	u1 := User{Name: "CR7", Age: 32}
+	u2 := User{Name: "LionelMessi", Age: 30}
+
+	people := []User{u1, u2}
+	bs, err := json.Marshal(people)
+	if err != nil {
+		fmt.Println(err)
+	}
+	
+	//os.Stdout.Write(bs) : same as next method
+	fmt.Println(string(bs))
+}
+
+type User struct {
+	Name string
+	Age  int
+}

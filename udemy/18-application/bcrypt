@@ -1,0 +1,45 @@
+package main
+
+import (
+	"fmt"	
+	"golang.org/x/crypto/bcrypt"
+)
+
+func main() {
+	//what's bcrypt ?
+	//when you're storing passwords anywhere , there's so many
+	//instances in case of high level companies which have not stored
+	//information while have not stored passwords well.
+
+	//bcrypt is an excellent way to store password information
+	//so as soon you receive a password form a user, you use
+	//bcrypt to encrypt it
+
+	//so the basic of encryption is just taking something and jumbling it up,
+	//jumbling it up, jumbling it up , turn it into something else
+	//but the output is always going to be the same
+
+	//we never store their password, never never saw their password
+	//** only the encrypted version of it
+
+	myPass := `welcome123`
+
+	//bcrypt password
+	bs, err := bcrypt.GenerateFromPassword([]byte(myPass), bcrypt.MinCost)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(bs)
+
+	
+	//comapre decrypt and encrypt passwords
+	myPass = `welcome124`
+	err = bcrypt.CompareHashAndPassword(bs,[]byte(myPass))
+	if err != nil {
+		fmt.Println("you can't logged in")
+	} else {
+		fmt.Println("weclome to website")
+	}
+	
+	
+}

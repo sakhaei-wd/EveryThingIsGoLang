@@ -1,0 +1,27 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+func main() {
+
+	//exercise2
+	//unmarshal the JSON into a Go data structure
+	sampleJson := []byte(`[{"Name":"CR7","Age":32},{"Name":"LionelMessi","Age":30}]`)
+	users := []User{}
+	err := json.Unmarshal(sampleJson, &users)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, v := range users {
+		fmt.Println(v)
+	}
+}
+
+type User struct {
+	Name string
+	Age  int
+}
