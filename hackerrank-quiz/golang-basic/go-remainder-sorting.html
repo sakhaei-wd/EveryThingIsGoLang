@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+
+
+
+<html lang="en" >
+  <head>
+   
+
+<div class="ps-content-wrapper-v0">
+<p>Implement a function that receives an array of strings and sorts them based on the following heuristics:</p>
+
+<ul>
+	<li>The primary sort is by increasing remainder of the strings' lengths, modulo 3.</li>
+	<li>If multiple strings have the same remainder, they should be sorted in alphabetical order.</li>
+</ul>
+
+<p class="section-title"> </p>
+
+<p class="section-title">Example</p>
+
+<p><em>strArr = ["Colorado", "Utah", "Wisconsin", "Oregon"] </em></p>
+
+<p> </p>
+
+<p>Their lengths are [8, 4, 9, 6]. The remainders, modulo 3, are [2, 1, 0, 0]. Oregon and Wisconsin have the same remainder and are further sorted alphabetically. Here is the sorted array showing (string, length, length modulo 3): [('Oregon', 6, 0), ('Wisconsin', 9, 0), ('Utah', 4, 1), ('Colorado', 8, 2)]. Return the sorted array <em>["Oregon", Wisconsin", "Utah", "Colorado"]</em>.</p>
+ 
+
+<p class="section-title">Function Description</p>
+
+<p>Complete the function <em>RemainderSorting</em> in the editor below. The function return an array of strings.</p>
+
+<p>RemainderSorting has the following parameter(s):</p>
+
+<p>    <em>strArr [n]string:</em>  an array of strings</p>
+
+<p> </p>
+
+<p class="section-title">Constraints</p>
+
+<ul>
+	<li>1  ≤ length of strArr  ≤ 700</li>
+	<li>1  ≤ length of each string  ≤ 100</li>
+</ul>
+
+<p> </p>
+<!-- <StartOfInputFormat> DO NOT REMOVE THIS LINE-->
+
+<details><summary class="section-title">Input Format For Custom Testing</summary>
+
+<div class="collapsable-details">
+<p>The first line contains an integer, <em>n</em>, denoting the number of elements in <em>strArr</em>.<br>
+Each line <em>i</em> of the <em>n</em> subsequent lines (where <em>0 ≤ i &lt; n</em>) contains a string describing <em>strArr<sub>i</sub></em>.</p>
+</div>
+</details>
+<!-- </StartOfInputFormat> DO NOT REMOVE THIS LINE-->
+
+<details open="open"><summary class="section-title">Sample Case 0</summary>
+
+<div class="collapsable-details">
+<p class="section-title">Sample Input For Custom Testing</p>
+
+<pre>
+STDIN    Function
+-----    --------
+4    →   strArr[] size n = 4
+a    →   strArr = ['a', 'ab', 'bc', 'abc']
+ab
+bc
+abc   </pre>
+
+<p class="section-title">Sample Output</p>
+
+<pre>
+abc
+a
+ab
+bc</pre>
+
+<p class="section-title">Explanation</p>
+
+<p>The following sorted array is in the form (string, length, length modulo 3): [('abc', 3, 0), ('a', 1, 1), ('ab', 2, 2), ('bc', 2, 2)].</p>
+</div>
+</details>
+
+<details><summary class="section-title">Sample Case 1</summary>
+
+<div class="collapsable-details">
+<p class="section-title">Sample Input For Custom Testing</p>
+
+<pre>
+STDIN        Function
+-----        --------
+6        →   strArr[] size n = 6
+Colorado →   strArr = ['Colorado', 'Utah', 'Montana', 'Wisconsin', 'Oregon', 'Maine']
+Utah
+Montana
+Wisconsin
+Oregon
+Maine  </pre>
+
+<p class="section-title">Sample Output</p>
+
+<pre>
+Oregon
+Wisconsin
+Montana
+Utah
+Colorado
+Maine</pre>
+
+<p class="section-title">Explanation</p>
+
+<p>The following sorted array is in the form (string, length, length modulo 3): [('Oregon', 6, 0), ('Wisconsin', 9, 0), ('Montana', 7, 1), ('Utah', 4, 1), ('Colorado', 8, 2), ('Maine', 5, 2)].</p>
+</div>
+</details>
+</div>
+</div></div></section></div></div></div></div></div><!--Required to handle event bubbling of click in ios safari -->
+  </body>
+</html>

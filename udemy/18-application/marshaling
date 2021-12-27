@@ -1,0 +1,42 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+func main() {
+
+	//JSON is a way that we could take our data, put it into certain data
+	//structure , which is commonly used for transfering data between applications
+
+	//the case of that is going to determine whether or not something is visible
+	//or not visible, outside of our program
+
+	//JSON Marshaling
+	// *** don't forget to use Capital Letter for your field , when marshaling struct
+	group := ColorGroup{
+		ID: 1,
+		Name : "Reds",
+		Colors: []string{"Red","Cherry","Rubby"},
+	}
+
+	
+	b, err := json.Marshal(group)
+	if (err != nil){
+		fmt.Print("err is : ", err)
+	}
+	//output is in JSON format
+	os.Stdout.Write(b)
+
+}
+
+type ColorGroup struct {
+	ID     int
+	Name   string
+	Colors []string
+}
+
+
+

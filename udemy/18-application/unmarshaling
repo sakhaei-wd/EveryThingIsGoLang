@@ -1,0 +1,30 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"	
+)
+
+func main() {
+
+	//JSON Unmarshaling
+	var jsonBlob = []byte(`[{"ID":1,"Name":"Reds","Colors":["Red","Cherry","Rubby"]}
+	]`)
+
+	var colorGroups []ColorGroup
+	err := json.Unmarshal(jsonBlob,&colorGroups)
+	if (err != nil){
+		fmt.Println("err is : ", err)
+	}
+
+	fmt.Printf("%+v", colorGroups)
+}
+
+type ColorGroup struct {
+	ID     int
+	Name   string
+	Colors []string
+}
+
+
+

@@ -1,0 +1,32 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+func main() {
+	jsonString := `[{"ID":1,"Name":"Reds","Colors":["Red","Cherry","Rubby"]}]`
+	byteArr := []byte(jsonString)
+
+	//fmt.Printf("%T", jsonString)
+	//fmt.Printf("%T", byteArr)	
+
+	colors := []Colors{}	
+	err := json.Unmarshal(byteArr,&colors)
+	if (err != nil){
+		fmt.Println("err is ", err)
+	}
+
+	for i,v:= range colors{
+		fmt.Println(i,v)
+	}
+
+}
+
+type Colors struct {
+	ID     int      `json:"ID"`
+	Name   string   `json:"Name"`
+	Colors []string `json:"Colors"`
+}
+
