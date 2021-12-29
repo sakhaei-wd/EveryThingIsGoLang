@@ -18,11 +18,13 @@ func main() {
 	var wg sync.WaitGroup
 	wg.Add(gs)
 
-	var mu sync.Mutex
+	var mu sync.RWMutex 
+	//using RWMutex helps us to seperate read lock to write lock on variable
 
 	for i := 0; i < gs; i++ {
 		go func() {
-			mu.Lock() //That code is all locked and nobody else can access the counter variable. think to TFS model
+			mu.Lock()  
+			//mu.RLock() so if i used RLock here , i give an error , because i lock read action
 			v := counter
 			runtime.Gosched()
 			v++
@@ -37,5 +39,3 @@ func main() {
 	fmt.Println("count:", counter)
 }
 
-//we could use a mutex to lock down certain chunks of our code so
-//that multiple go routines can't access that code at the same time, and we could prevent a race condition.
