@@ -1,0 +1,13 @@
+package main
+
+import (
+	"fmt"	
+)
+
+func main() {
+	
+	fmt.Println("mutex is working")
+}
+
+//we could use a mutex to lock down certain chunks of our code so
+//that multiple go routines can't access that code at the same time, and we could prevent a race condition.
