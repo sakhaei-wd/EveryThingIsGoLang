@@ -1,0 +1,43 @@
+package main
+
+import (
+	"fmt"
+	"runtime"
+	"sync"
+)
+
+func main() {
+
+	//exercise3
+	//Using goroutines, create an incrementer program
+	//have a variable to hold the incrementer value
+	//lunch bunch of goroutines
+	//each goroutines should
+	//read the incrementer value
+	//store it in a new value
+	//yield the processor with runtime.Gosched()
+	//increment the new variable
+	//write the value in the new variable back to the incrementer variable
+	//use waitgroups to wait for all of your goroutines to finish
+	//the above will create a race condition
+	//prove that it's a race condition by using the -race flag
+	//if you need help, here's a hint :
+
+	var incrementer = 0
+	var wg sync.WaitGroup
+
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {			
+			v := incrementer
+			runtime.Gosched() //Gosched yields the processor, allowing other goroutines to run
+			v++
+			incrementer = v
+			wg.Done()
+		}()
+	}
+	
+	wg.Wait()
+	fmt.Println("incrementer is : " ,incrementer)
+
+}

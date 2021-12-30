@@ -1,0 +1,30 @@
+package main
+
+import (
+	"fmt"
+	"runtime"
+	"sync"
+)
+
+func main() {
+	//fix the race condition you created in the previous exercise by using mutex
+	var incrementer = 0
+	var wg sync.WaitGroup
+	var mu sync.Mutex
+
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			mu.Lock()
+			v := incrementer
+			runtime.Gosched() //Gosched yields the processor, allowing other goroutines to run
+			v++
+			incrementer = v
+			wg.Done()
+			mu.Unlock()
+		}()
+	}
+
+	wg.Wait()
+	fmt.Println("incrementer is : ", incrementer)
+}

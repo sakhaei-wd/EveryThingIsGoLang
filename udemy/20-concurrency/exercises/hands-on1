@@ -1,32 +1,33 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
+	"runtime"
+	"sync"
 )
 
 func main() {
 
 	//exercise1
-	//marshal the []user to JSON. there is a little bit of a curve ball in
-	//this hands-on-exercise - remember to ask yourself you need to EXPORT
-	//a value from a package
-
-	u1 := User{Name: "CR7", Age: 32}
-	u2 := User{Name: "LionelMessi", Age: 30}
-
-	people := []User{u1, u2}
-	bs, err := json.Marshal(people)
-	if err != nil {
-		fmt.Println(err)
-	}
+	//in addition to the main goroutine, launch two additional goroutines
+		//each additional goroutine should print something out 
+	//use waitgroup to make sure each goroutine finishes before your program exists
 	
-	//os.Stdout.Write(bs) : same as next method
-	fmt.Println(string(bs))
-}
-
-type User struct {
-	Name string
-	Age  int
+	fmt.Println("cpus : " ,runtime.NumCPU())
+	fmt.Println("goroutines : ", runtime.NumGoroutine())
+	var wg sync.WaitGroup 
+	wg.Add(1)
+	//or wg.Add(2) without next wg.Add(1)
+	go func(){
+		fmt.Println("func 1 done")
+		wg.Done()
+	}()
+	
+	wg.Add(1)
+	go func(){
+		fmt.Println("func 2 done")
+		wg.Done()
+	}()
+	fmt.Println("goroutines : ", runtime.NumGoroutine())
+	wg.Wait()
 }

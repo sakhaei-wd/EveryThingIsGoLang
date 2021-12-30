@@ -1,0 +1,61 @@
+package main
+
+import (
+	"fmt"	
+)
+
+func main() {
+
+	//exercise2
+	//this exercise will reinforce our understanding of method sets :
+	//create a type person struct
+	//attach a method speak to type person using a pointer receiver
+		// *person
+	//create type human interface
+		//to implicity implement the interface, a human must have the speak method
+	//create a func "saysSomething"
+		//have it take in a human as a parameter
+		//have it call the speak method
+	//show the following in your code
+		//you CAN pass a value of type *person into saysSomething
+		//you CANNOT pass a value of type person into saysSomething
+	
+	//here is a hint if you need some help
+	
+	p1 := person{fullName: "Cristiano Ronaldo", age: 30}
+	p2 := person{fullName: "Lionel Messi" ,age: 30}
+
+	fmt.Println(p1.age)
+	fmt.Println(p2.age)
+
+	saysSomething(&p1)
+	saysSomething(&p2)
+	
+	saysSomething(&p1)
+	saysSomething(&p2)
+
+	fmt.Println(p1.age)
+	fmt.Println(p2.age)
+}
+
+//it's so amazing that interfaces get human parameter as a pointer value
+//because of speak func implementation with pointer
+//keep looking to this func, we didn't use h human as a receiver, but also as parameter
+//and that's so important in declaring these type of methods
+func saysSomething(h human){ 
+	h.speak() 	
+}
+
+type human interface{
+	speak() 
+}
+
+func (p *person) speak(){
+	fmt.Print("i want to speak with", p.fullName)
+	p.age += 10
+}
+
+type person struct{
+	fullName string
+	age int
+}
