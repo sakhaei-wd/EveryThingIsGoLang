@@ -1,0 +1,43 @@
+package main
+
+import (
+	"fmt"	
+)
+
+func main() {
+	c := make(chan int)
+	//c <- 42 //not working
+	go func(){ 
+		c <- 42		//make send and receive concurrent
+	}()
+	
+	fmt.Println(<-c)
+
+	//next solution for prevent blocking is using "buffer channel"
+	
+	//a Buffer channel is a channel that will allow certain values
+	//to sit in that channel, regardless of whether or not something's ready to pull it off.
+	//And so I could say, OK, my buffer channel will allow one to sit in there.
+	//It's going to allow one value to sit in there.
+
+	c = make(chan int,1) //allows one person to sit in , like defining size for an array
+	c <- 42
+	//c <- 42 //but if i add another value it has deadlock, unless i increase the size
+	fmt.Println(<-c) //it works!
+	
+	
+	
+}
+
+//All go routines are a sleep deadlock, and that's because channels blocked and so my code starts.
+//A package means for my program enters, goes to function.
+//That's the entry point for my program.
+//It makes a channel and then it comes here and it tries to put forty two on the channel and it blocks
+//because when you send and receive on a channel, it's like relay racers, racers in a track race that
+//have they have to pass a baton and they have to pass it hand to hand and the transaction cannot occur.
+//Right.
+//
+//     
+//     "It can occur until both send and receive can happen at the same time, at the same time."
+
+//This is one of the most important things you have to know about using channels and go routines is understanding

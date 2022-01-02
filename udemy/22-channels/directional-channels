@@ -1,0 +1,20 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	c := make(chan<- int, 2) //this is a channel which can only send values
+	c <- 42
+	//fmt.Println(<-c) //we give error : you can't receive value from channel
+	
+
+	cr := make(chan <- int) //send
+	cs := make(<- chan int) //receive
+	
+	fmt.Printf("%T\n" , cr)
+	fmt.Printf("%T\n" , cs)
+}
+
+//directive channel : read from left to right
