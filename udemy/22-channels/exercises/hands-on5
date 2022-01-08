@@ -1,0 +1,48 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	//exercise5 :
+	//show to comma,ok idiom starting with this code
+	//(https://go.dev/play/p/YHOMV9NYKK)
+
+	c := make(chan int)
+	go gen(c)
+	for i := 0; i < 10; i++ {
+		c, ok := <-c
+		if ok {
+			fmt.Println(c, ok)
+		} else {
+			fmt.Println("it's out of range : ", c, ok)
+		}
+	}
+}
+
+func gen(c chan<- int) {
+	go func() {
+		for i := 0; i < 5; i++ {
+			c <- i
+		}
+		close(c)
+	}()
+}
+
+
+//another mode : 
+
+	//func main() {
+	//	c := make(chan int)
+	//	go func() { c <- 2 }()
+	//
+	//	v, ok := <-c
+	//	fmt.Println(v, ok)
+	//
+	//	close(c)
+	//
+	//	v, ok = <-c
+	//	fmt.Println(v, ok)
+	//}

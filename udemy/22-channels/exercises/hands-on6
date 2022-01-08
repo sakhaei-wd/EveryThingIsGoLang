@@ -1,0 +1,37 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	//exercise6 :
+	//write a program that :
+	//put 100 number to a channel
+	//pull the numbers off the channel and print them
+	//(https://go.dev/play/p/quWnlwzs2z)
+
+	c := make(chan int)
+	gen(c)
+
+	for i := range c {
+		fmt.Print(i)
+		if i%2 == 0 {
+			fmt.Print("**")
+		} else {
+			fmt.Print(" ")
+		}
+
+	}
+
+}
+
+func gen(c chan<- int) {
+	go func() {
+		for i := 0; i < 100; i++ {
+			c <- i
+		}
+		close(c)
+	}()
+}

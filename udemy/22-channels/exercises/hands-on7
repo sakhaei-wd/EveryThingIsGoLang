@@ -1,0 +1,39 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	//exercise7 :
+	//write a program that
+	//launches 10 goroutines
+	// each goroutine adds 10 numbers to a channel
+	//pull the numbers off the channel and print them
+	//(https://go.dev/play/p/quWnlwzs2z)
+	c := make(chan int)
+	gen(c)
+
+	//so we use loop with max iteration , instead of range
+	//to handle close of channel (as we didn't use close() func)
+	for i:=0 ; i < 100; i++{
+		fmt.Print(<- c," ")
+	}	
+
+}
+
+func gen(c chan<- int) {
+
+	for i := 0; i < 10; i++ {
+		go func() {
+			for j := 0; j < 10; j++ {
+				c <- j
+			}
+		}()
+
+		//we cant close the channel here , because we launch 10 goroutines 
+		//which can intervene with close statement		
+	}
+
+}

@@ -2,32 +2,25 @@ package main
 
 import (
 	"fmt"
-	"runtime"
-	"sync"
+	
 )
 
 func main() {
 
-	//exercise1
-	//in addition to the main goroutine, launch two additional goroutines
-		//each additional goroutine should print something out 
-	//use waitgroup to make sure each goroutine finishes before your program exists
+	//exercise1 : 
+	//get this code working : (https://play.golang.org/p/j-EA6003P0)
+		// using func literal, aka, anonymous self-executing func
+		// a buffered channel
+
+		//using func literal
+		c := make(chan int)
+		go func() { c <- 42 }()
 	
-	fmt.Println("cpus : " ,runtime.NumCPU())
-	fmt.Println("goroutines : ", runtime.NumGoroutine())
-	var wg sync.WaitGroup 
-	wg.Add(1)
-	//or wg.Add(2) without next wg.Add(1)
-	go func(){
-		fmt.Println("func 1 done")
-		wg.Done()
-	}()
-	
-	wg.Add(1)
-	go func(){
-		fmt.Println("func 2 done")
-		wg.Done()
-	}()
-	fmt.Println("goroutines : ", runtime.NumGoroutine())
-	wg.Wait()
-}
+		fmt.Println(<-c)
+
+		//using buffered channel
+		c = make(chan int,1)
+		c <- 42	
+		fmt.Println(<-c)
+		
+}	

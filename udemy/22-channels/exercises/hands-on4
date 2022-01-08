@@ -1,0 +1,44 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	//exercise4 :
+	//starting with this code, pull of the values off the channel using a select statement
+	//(https://go.dev/play/p/MvL6uamrJP)
+
+	q := make(chan int)
+	c := gen(q)
+
+	receive(c, q)
+
+	fmt.Println("about to exit")
+}
+
+func gen(q chan<- int) <-chan int {
+	c := make(chan int)
+
+	go func() {
+		for i := 0; i < 100; i++ {
+			c <- i
+		}
+		q <- 1
+		close(c)
+	}()
+
+	return c
+}
+
+func receive(c, q <-chan int) {
+	for {
+		select {
+		case v := <-c:
+			fmt.Println("the value is ", v)
+		case <-q:
+			return
+		}
+	}
+}
