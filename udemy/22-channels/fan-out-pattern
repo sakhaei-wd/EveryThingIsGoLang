@@ -1,0 +1,87 @@
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+//Fan-Out means to divide the data from a single source into multiple smaller chunks
+func main() {
+	even := make(chan int)
+	odd := make(chan int)
+	fanin := make(chan int)
+
+	//put channels into fan-in channel
+	go send(even, odd)
+	go receive(even, odd, fanin)
+
+	// go func() {
+	// 	for v := range fanin {
+	// 		fmt.Println(v)
+	// 	}
+	// }()
+
+	//get values from even
+	go func() {
+		for v := range even {
+			fmt.Println("even :", v)
+		}
+	}()
+
+	//get values from odd
+	for v := range odd {
+		fmt.Println("odd : ", v)
+	}
+
+	fmt.Println("about to exit")
+}
+
+//send channel
+func send(even, odd chan<- int) {
+	for i := 0; i < 100; i++ {
+		if i%2 == 0 {
+			even <- i
+		} else {
+			odd <- i
+		}
+	}
+	close(even)
+	close(odd)
+}
+
+// receive channel
+func receive(odd, even <-chan int, fanIn chan<- int) {
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		for v := range odd {
+			fanIn <- v
+		}
+		wg.Done()
+	}()
+
+	wg.Add(1)
+	go func() {
+		for v := range even {
+			fanIn <- v
+		}
+		wg.Done()
+	}()
+
+	wg.Wait()
+	close(fanIn)
+}
+
+func fanOut(fanOut <-chan int, odd, even chan<- int) {
+
+	for v := range fanOut {
+		if v%2 == 0 {
+			even <- v
+		} else {
+			odd <- v
+		}
+	}
+
+	close(even)
+	close(odd)
+}

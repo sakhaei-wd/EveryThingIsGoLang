@@ -1,0 +1,23 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	c := make(chan int)
+	go func() {
+		c <- 42
+		close(c)
+	}()
+
+	for i := 0; i < 4; i++ {
+		v, ok := <-c
+		if ok {
+			fmt.Println(v, ok)
+		} else {
+			fmt.Println(i, ": run out of channel")
+		}
+	}
+}

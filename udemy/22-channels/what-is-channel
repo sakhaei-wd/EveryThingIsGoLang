@@ -5,6 +5,7 @@ import (
 )
 
 func main() {
+
 	c := make(chan int)
 	//c <- 42 //not working
 	go func(){ 
@@ -24,8 +25,6 @@ func main() {
 	c <- 42
 	//c <- 42 //but if i add another value it has deadlock, unless i increase the size
 	fmt.Println(<-c) //it works!
-	
-	
 	
 }
 

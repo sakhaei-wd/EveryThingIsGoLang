@@ -1,3 +1,5 @@
+//question : how to print 10 numbers simultaneously (with O(1) complexity) ?
+//solution using time.Sleep
 package main
 
 import (
@@ -12,3 +14,31 @@ func main() {
 	}
 	time.Sleep(1 * time.Second)
 }
+
+
+//solution using waithGroup
+//package main
+
+// import (
+// 	"fmt"
+// 	"sync"
+// )
+
+// var wg sync.WaitGroup
+
+// func main() {
+
+// 	for i := 1; i <= 10; i++ {
+// 		wg.Add(1) //one comes from complexity of i , which is 1 in each step
+// 		go func(number int) {
+
+// 			fmt.Println(number)
+// 			wg.Done()
+// 		}(i)
+//		wg.Wait() //در این حالت صبر میکنیم هر goroutine تموم شه بعد بریم سراغ بعدی برای این هم
+		//در این حالت اعداد به صورت مرتب نشون داده میشن
+// 	}
+// 	wg.Wait()			//در این حالت صبر میکنیم تا تمام goroutine ها تموم شه 
+						//در این حالت احتمالا اعداد مرتب نشون داده نمیشن چون هر کدوم با یه زمانی شروع به اجرا میکنن
+						//ولی این wait خیالمون رو راحت میکنه که منتظر همه شون وایمیسیم
+// }

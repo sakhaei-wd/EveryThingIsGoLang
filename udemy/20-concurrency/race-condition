@@ -26,10 +26,6 @@ func main() {
 			wg.Done()
 		}()
 
-		// go func(index *int) {
-		// 	counter++
-		// }(&counter)
-
 		fmt.Println("GoRoutines : ", runtime.NumGoroutine())
 	}
 	wg.Wait()

@@ -1,0 +1,23 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	myChannel := make(chan int)
+	go func() {
+		for i := 0; i < 100; i++ {
+			myChannel <- i
+		}
+		close(myChannel)
+		//if we don't use close() we give error: all goroutines are asleep - deadlock!
+	}()
+
+	//use range on channel
+	for i := range myChannel {
+		fmt.Print(i, " ")
+	}
+
+}
