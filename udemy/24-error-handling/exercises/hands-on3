@@ -1,0 +1,45 @@
+package main
+
+import (
+	"fmt"
+)
+
+//exercise3
+//create a struct "customErr" which implements the builtin error interface.
+//has a value of type error as a parameter. create a value of type "customErr" passed it into "foo"
+//if you need hint, check this :
+//http://play.golang.org/p/9a1IAWy5E6
+
+type customErr struct {
+	fullName string
+	age      int
+	message  error
+}
+
+//go is something that implements this interface.
+//So any type that has this method, a method with this signature is going to implement that interface
+
+//any value of type customErr will implicitly implement the error interface
+//from it's built-in package
+func (c customErr) Error() string {
+	return fmt.Sprintf("customError message : %v", c.message)
+}
+
+func main() {
+	//1- get error value from func and put it into variable
+	_, myError := fmt.Scan("enter your name")
+
+	//2- use that variable as a input parameter of struct
+	c1 := customErr{"James Bond", 12, myError}
+	foo(c1)	
+}
+
+//customErr now is child of error cause of implementing "Error() string" func
+//check type error interface in builtin.go too
+func foo(e error) {
+	fmt.Println("hello, we have", e)
+
+	//conversion vs. assertion
+	fmt.Println("i'm", e.(customErr).fullName) //use of assertion to tell the interface that i'm for customError struct
+}
+

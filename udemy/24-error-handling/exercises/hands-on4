@@ -1,0 +1,39 @@
+package main
+
+//exercise4
+//starting with this code, (https://go.dev/play/p/wlEM1tgfQD)
+//use the sqrt.Error struct as a value of type error.
+//use these numbers for your :
+//lat 	"50.22 N"
+//long 	"99.46 W"
+
+//solution : http://play.golang.org/p/Hkjf63wDcd
+import (
+	"fmt"
+	"log"
+)
+
+type sqrtError struct {
+	lat  string
+	long string
+	err  error
+}
+
+func (se sqrtError) Error() string {
+	return fmt.Sprintf("math error: %v %v %v", se.lat, se.long, se.err)
+}
+
+func main() {
+	_, err := sqrt(-10.23)
+	if err != nil {
+		log.Println(err)
+	}
+}
+
+func sqrt(f float64) (float64, error) {
+	if f < 0 {
+		// write your error code here
+		return 0,sqrtError{"10","10",fmt.Errorf("happens")}
+	}
+	return 42, nil
+}

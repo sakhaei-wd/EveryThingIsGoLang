@@ -85,3 +85,15 @@ func fanOut(fanOut <-chan int, odd, even chan<- int) {
 	close(even)
 	close(odd)
 }
+
+
+
+//other examples : fanout in
+	//https://play.golang.org/p/iU7Oee2nm7
+
+//throttle throughput
+	//https://play.golang.org/p/RzR3Kjrx7q
+
+
+
+

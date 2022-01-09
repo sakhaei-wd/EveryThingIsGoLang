@@ -1,0 +1,68 @@
+// Error Handling :
+
+// The most important thing which you can learn from the section on Errors is to always, always, always
+// check your errors.
+package main
+
+import (
+	"fmt"
+	"io"
+	"io/ioutil"
+	"os"
+	"strings"
+)
+
+func main() {
+	n,err := fmt.Println("Hello errors")	
+	if err != nil{
+		fmt.Print(err)
+	}
+	fmt.Println(n) //print the number of characters
+	fmt.Println("--------------------")
+
+	//another example
+	var answer1 string
+	fmt.Print("enter your name : ")
+	_, err = fmt.Scan(&answer1)
+	if (err != nil){
+		panic(err)
+	}
+	fmt.Println("your name is",answer1)
+	fmt.Println("--------------------")
+
+
+	//example 3 : file 
+	f ,err := os.Create("notes.txt")
+	if err != nil{
+		fmt.Println(err)
+	}
+	//it's nice, because we handle error right after the os.Open , it's best form of error handling in Go
+	defer f.Close() //if didn't use defer we waste our resources because of file open
+
+	r := strings.NewReader("your name is " + answer1)
+	//create a file then write this string on it
+	io.Copy(f,r)
+
+
+	//example 4 
+	f, err = os.Open("notes.txt")
+	if err != nil{
+		fmt.Println(err)
+	}
+	defer f.Close()
+	//read all chars from file and set it into bs
+	bs,err := ioutil.ReadAll(f)
+	if err != nil{
+		fmt.Println(err)
+	}
+	//then print it here
+	fmt.Println("example 4 : ", string(bs))
+
+
+	//*** always check your errors 
+	
+}
+
+
+
+

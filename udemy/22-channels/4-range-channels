@@ -19,5 +19,4 @@ func main() {
 	for i := range myChannel {
 		fmt.Print(i, " ")
 	}
-
 }

@@ -1,0 +1,38 @@
+//make custom error function
+package main
+
+import (
+	"fmt"
+	"log"
+	"json"
+)
+
+type location struct {
+	lat  int
+	lang int
+	err  error
+}
+
+//declare error function for this struct (overloading general error func)
+func (l location) Error() string {
+	return fmt.Sprintf("error in location %v %v", l.lat, l.lang)
+}
+
+func main() {
+
+	_, err := sqrt(-10)
+	if err != nil {
+		//fmt.Println(err)
+		log.Fatalln(err)
+	}
+
+}
+
+func sqrt(f float64) (float64, error) {
+	if f < 0 {
+		err := fmt.Errorf("f has negative value : %v", f)
+		//and use it here 
+		return f, location{0, 0, err}
+	}
+	return 42, nil
+}

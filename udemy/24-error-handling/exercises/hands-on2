@@ -1,0 +1,48 @@
+package main
+
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	"log"
+)
+
+//exercise2
+//start with this code, create a custom error function using "fmt.Errof()"
+//http://play.golang.org/p/9a1IAWy5E6
+
+type person struct {
+	First   string
+	Last    string
+	Sayings []string
+}
+
+func main() {
+	p1 := person{
+		First:   "James",
+		Last:    "Bond",
+		Sayings: []string{"Shaken, not stirred", "Any last wishes?", "Never say never"},
+	}
+
+	bs, err := toJSON(p1)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	fmt.Println(string(bs))
+
+}
+
+// toJSON needs to return an error also
+func toJSON(a interface{}) ([]byte, error) {
+	bs, err := json.Marshal(a)
+	if err != nil {
+		//use fmt.Errorf
+		err = fmt.Errorf("cannot convert the struct %v to json ", a)
+		
+		//use error.new
+		return []byte{}, errors.New(fmt.Sprintf("cannot convert the struct %v to json : %v", a, err))
+	}
+
+	return []byte(bs), err
+}

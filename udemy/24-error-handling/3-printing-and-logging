@@ -1,0 +1,26 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+)
+
+func main() {
+
+	file1, err := os.Create("logOutput.txt")
+	if err != nil {
+		fmt.Println("err is : ", err)
+	}
+	defer file1.Close()
+	log.SetOutput(file1)
+	//we're saying, where's the log information output going to go?
+	//It's going to go to this file and now we're going to open a file that doesn't exist f tha that's going
+
+	file2, err := os.Open("myFile.txt")
+	if err != nil {
+		fmt.Println("err is : ", err)
+	}
+	log.Println("log is : ", err)
+	defer file2.Close()
+}
