@@ -30,7 +30,6 @@ func receive(e, o, q <-chan int) {
 			fmt.Println("from the quit channel :", v)			
 			return
 		}
-
 	}
 }
 
