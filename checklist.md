@@ -23,26 +23,26 @@ Observability affects team productivity and system availability. If observabilit
 | :--------- | :----------------- | :------ |
 | Snyk | Its deployment pipeline invokes Snyk so deployments can be monitored by security team | :soon: | :soon: | :soon: |
 | Tracing | Its requests are traced in NewRelic. | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| NewRelic | NewRelic is created. | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Actionable alert | Its Monitors are created in AlertManager. And those alerts are actionable. | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Log to STDOUT | Its logs are output to STDOUT/STDERR. | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| NewRelic | NewRelic is created. | :soon: | :white_check_mark: | :white_check_mark: |
+| Actionable alert | Its Monitors are created in AlertManager. And those alerts are actionable. | :white_check_mark: | :white_check_mark: | :soon: |
+| Log to STDOUT | Its logs are output to STDOUT/STDERR. | :soon: | :soon: | :white_check_mark: |
 | Log as JSON | Its logs are emitted. | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| k6 testing | It is load tested. | :white_check_mark: | :soon: | :soon: |
+| k6 testing | It is load tested. | :soon: | :soon: | :soon: |
 | Error tracking | Its errors are tracked by Sentry. |  | :soon: | :soon: |
 
 ## :airplane: Reliability
 
 | Check name | Short Description  | Status |
 | :--------- | :----------------- | :------ |
-| Auto Scale | It automatically scales horizontally to handle fluctuating workloads. | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Auto Scale | It automatically scales horizontally to handle fluctuating workloads. | :white_check_mark: | :white_check_mark: | :soon: |
 | CPU req/limit | Its CPU limit and request  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Memory req/limit | Its memory resource request value is as same as limit value. | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Capacity planning | It can handle the expected load: either load test has been performed, or the expected traffic is under control (e.g., by Gateway). | :white_check_mark:  | :white_check_mark: | :white_check_mark: |
+| Memory req/limit | Its memory resource request value is as same as limit value. | :soon: | :white_check_mark: | :white_check_mark: |
+| Capacity planning | It can handle the expected load: either load test has been performed, or the expected traffic is under control (e.g., by Gateway). | :white_check_mark:  | :soon: | :white_check_mark: |
 | Zero downtime deploy | Its deploy process does not cause service degradation or downtime (e.g. error rate does not increase during deploy). | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Graceful shutdown | It can stop gracefully. | :white_check_mark:  | :white_check_mark: | :white_check_mark: |
-| Graceful degradation | It keeps working, at least partially, while dependencies (e.g. other service or database) are not working partially or completely. | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Liveness Probe | It has a health check (endpoint) for liveness probe. And liveness probe is configured. | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Readiness Probe | It has a health check (endpoint) for readiness probe. And readiness probe is configured. | :white_check_mark:  | :white_check_mark: | :white_check_mark: |
+| Graceful shutdown | It can stop gracefully. | :white_check_mark:  | :soon: | :white_check_mark: |
+| Graceful degradation | It keeps working, at least partially, while dependencies (e.g. other service or database) are not working partially or completely. | :white_check_mark: | :soon: | :white_check_mark: |
+| Liveness Probe | It has a health check (endpoint) for liveness probe. And liveness probe is configured. | :white_check_mark: | :white_check_mark: | :soon: |
+| Readiness Probe | It has a health check (endpoint) for readiness probe. And readiness probe is configured. | :white_check_mark:  | :white_check_mark: | :soon: |
 | Timeout | It sets an appropriate timeout for requests over a network. | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 
@@ -50,7 +50,7 @@ Observability affects team productivity and system availability. If observabilit
 
 | Check name | Short Description  | Status |
 | :--------- | :----------------- | :------ |
-| Security review | It has completed the security design review by security team, and they have been notified of any public APIs. |  | :white_check_mark: | :white_check_mark: |
-| Non-root user | Its docker container runs as non-root user | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Secrets | Its sensitive configuration is stored in Kubernetes secrets.  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Security review | It has completed the security design review by security team, and they have been notified of any public APIs. |  | :white_check_mark: | :soon: |
+| Non-root user | Its docker container runs as non-root user | :soon: | :soon: | :soon: |
+| Secrets | Its sensitive configuration is stored in Kubernetes secrets.  | :soon: | :soon: | :soon: |
 | Non-sensitive log | It does not write sensitive information to app logs (STDOUT/STDERR). | :white_check_mark: | :white_check_mark: | :white_check_mark: |
